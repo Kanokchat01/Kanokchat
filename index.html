@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<script>
+  (function(){
+    try{
+      var saved=localStorage.getItem('ks-theme');
+      var theme=saved||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',theme);
+    }catch(e){}
+  })();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Kanokchat Samansuk — Junior Software Developer</title>
 <meta name="description" content="Junior Software Developer skilled in Flutter, Firebase, FastAPI, React/Next.js, and AI-integrated applications. International internship at Kagawa KOSEN, Japan."/>
@@ -28,6 +37,25 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   --max:1080px;
   --px:24px;
   --r:4px;
+}
+
+[data-theme="dark"]{
+  --cream:#10160f;
+  --cream2:#161f15;
+  --cream3:#1d271b;
+  --ink:#eaf3e8;
+  --ink2:#c4d4c2;
+  --ink3:#8da391;
+  --ink4:#5d7060;
+  --rust:#8fd19a;
+  --rust2:#6fae7f;
+  --sage:#6fae7f;
+  --border:#26331f;
+  --border2:#324228;
+}
+
+body,.nav,.cert-thumb-wrap,.photo-frame img{
+  transition:background-color 0.4s ease,border-color 0.4s ease,color 0.4s ease;
 }
 
 body{
@@ -85,6 +113,35 @@ a{text-decoration:none;color:inherit}
 }
 .nav-cta:hover{background:var(--rust)!important;color:#fff!important;}
 .nav-cta::after{display:none!important;}
+
+/* lang toggle */
+.lang-toggle{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.06em;
+  padding:4px 11px;border-radius:99px;
+  border:1px solid var(--border2);background:var(--cream2);
+  color:var(--ink3);cursor:pointer;flex-shrink:0;
+  transition:all 0.25s ease;
+}
+.lang-toggle:hover{border-color:var(--rust);color:var(--rust);}
+
+/* theme toggle */
+.theme-toggle{
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--border2);background:var(--cream2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;transition:all 0.25s ease;
+  font-size:0.95rem;position:relative;
+}
+.theme-toggle:hover{border-color:var(--rust);transform:rotate(15deg);}
+.theme-toggle .icon-sun{display:none;}
+.theme-toggle .icon-moon{display:block;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+.m-theme-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;margin-top:4px;border-top:1px solid var(--border);
+}
+.m-theme-row span{font-size:0.85rem;color:var(--ink3);font-weight:500;}
 
 /* hamburger */
 .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;}
@@ -329,6 +386,11 @@ a{text-decoration:none;color:inherit}
   transition:all 0.2s;
 }
 .link-btn:hover{border-color:var(--rust);color:var(--rust);}
+.case-trigger{
+  font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--cream)!important;
+  border:1px solid var(--ink)!important;cursor:pointer;
+}
+.case-trigger:hover{background:var(--rust)!important;border-color:var(--rust)!important;color:#fff!important;}
 .proj-num-big{
   font-family:'DM Serif Display',serif;font-style:italic;
   font-size:3.8rem;color:var(--cream3);line-height:1;
@@ -356,6 +418,63 @@ a{text-decoration:none;color:inherit}
   transition:all 0.2s;
 }
 .cert-bar-link:hover{background:var(--rust);color:#fff;border-color:var(--rust);}
+
+/* ── CERTIFICATION CARDS ── */
+.cert-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+}
+.cert-card{
+  background:var(--cream2);border:1px solid var(--border2);border-radius:8px;
+  overflow:hidden;transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+  display:flex;flex-direction:column;
+}
+.cert-card:hover{
+  border-color:var(--rust);transform:translateY(-3px);
+  box-shadow:0 12px 28px -10px rgba(23,34,27,0.18);
+}
+.cert-thumb-wrap{
+  display:block;position:relative;aspect-ratio:4/3;overflow:hidden;
+  background:#0e1712;border-bottom:1px solid var(--border2);
+}
+.cert-thumb-wrap img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  transition:transform 0.4s ease;display:block;
+}
+.cert-card:hover .cert-thumb-wrap img{transform:scale(1.05);}
+.cert-flag{
+  position:absolute;top:10px;left:10px;
+  background:rgba(15,23,18,0.72);color:#fff;backdrop-filter:blur(4px);
+  font-size:0.68rem;font-weight:600;padding:4px 10px;border-radius:99px;
+  letter-spacing:0.02em;
+}
+.cert-card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1;}
+.cert-pill{
+  align-self:flex-start;font-size:0.62rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.06em;color:var(--rust);background:rgba(127,170,131,0.14);
+  padding:3px 9px;border-radius:99px;margin-bottom:2px;
+}
+.cert-card-title{font-size:0.97rem;font-weight:700;color:var(--ink);line-height:1.3;}
+.cert-card-org{font-size:0.78rem;color:var(--ink2);line-height:1.4;}
+.cert-card-meta{font-size:0.72rem;color:var(--ink3);font-weight:500;}
+.cert-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px;}
+.cert-tag{
+  font-size:0.64rem;font-weight:600;color:var(--ink2);
+  background:rgba(0,0,0,0.04);border:1px solid var(--border);
+  padding:2px 9px;border-radius:99px;
+}
+.cert-card-link{
+  margin-top:auto;font-size:0.76rem;font-weight:600;color:var(--rust);
+  display:inline-flex;align-items:center;gap:4px;width:fit-content;
+  padding-top:6px;transition:gap 0.2s;
+}
+.cert-card-link:hover{gap:8px;}
+
+@media(max-width:880px){
+  .cert-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .cert-grid{grid-template-columns:1fr;}
+}
 
 /* ── EXPERIENCE ── */
 .exp-item{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--border);}
@@ -423,6 +542,134 @@ footer{
 .fade-up.visible{opacity:1;transform:none;}
 .d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
 
+/* ── CASE VIDEO ── */
+.case-video-wrap{padding:0 40px;margin-bottom:16px;}
+.case-video-label{
+  font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--rust);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.case-video-label::after{content:"";flex:1;height:1px;background:var(--border);}
+.case-video-card{
+  border-radius:10px;overflow:hidden;
+  border:1px solid var(--border2);
+  background:#000;
+  box-shadow:0 8px 24px -8px rgba(0,0,0,0.28);
+  position:relative;aspect-ratio:16/9;
+}
+.case-video-player{
+  width:100%;height:100%;display:block;border:none;
+}
+@media(max-width:680px){
+  .case-video-wrap{padding:0 22px;}
+}
+
+/* ── CASE STUDY MODAL ── */
+.case-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(10,15,10,0.6);backdrop-filter:blur(4px);
+  display:none;align-items:flex-start;justify-content:center;
+  padding:40px 20px;overflow-y:auto;
+  opacity:0;transition:opacity 0.25s ease;
+}
+.case-overlay.open{display:flex;opacity:1;}
+.case-modal{
+  background:var(--cream);border-radius:10px;
+  max-width:880px;width:100%;
+  border:1px solid var(--border2);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,0.35);
+  position:relative;
+  transform:translateY(24px) scale(0.98);
+  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.case-overlay.open .case-modal{transform:translateY(0) scale(1);}
+.case-close{
+  position:absolute;top:16px;right:16px;z-index:5;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--cream2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1rem;color:var(--ink2);
+  transition:all 0.2s;
+}
+.case-close:hover{background:var(--ink);color:var(--cream);transform:rotate(90deg);}
+
+.case-header{padding:36px 40px 0;}
+.case-eyebrow{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--rust);margin-bottom:10px;}
+.case-title{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--ink);line-height:1.1;margin-bottom:8px;}
+.case-sub{font-size:0.88rem;color:var(--ink3);margin-bottom:20px;line-height:1.6;}
+.case-stack-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:24px;}
+
+/* gallery */
+.case-gallery{
+  padding:0 40px;margin-bottom:8px;
+}
+.case-gallery-main{
+  position:relative;border-radius:8px;overflow:hidden;
+  background:var(--cream3);border:1px solid var(--border2);
+  aspect-ratio:9/12;max-height:520px;
+  display:flex;align-items:center;justify-content:center;
+}
+.case-gallery-main.landscape{aspect-ratio:16/10;max-height:460px;}
+.case-gallery-main img{width:100%;height:100%;object-fit:contain;display:block;}
+.gal-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,0.85);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;color:var(--ink);z-index:3;
+  transition:all 0.2s;
+}
+.gal-arrow:hover{background:var(--rust);color:#fff;}
+.gal-prev{left:12px;}
+.gal-next{right:12px;}
+.gal-counter{
+  position:absolute;bottom:12px;right:12px;z-index:3;
+  background:rgba(0,0,0,0.55);color:#fff;font-size:0.68rem;font-weight:600;
+  padding:3px 10px;border-radius:99px;
+}
+.case-thumbs{
+  display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px;
+  scrollbar-width:thin;
+}
+.case-thumbs::-webkit-scrollbar{height:4px;}
+.case-thumbs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.case-thumb{
+  flex-shrink:0;width:54px;height:96px;border-radius:5px;overflow:hidden;
+  border:2px solid transparent;cursor:pointer;opacity:0.55;
+  transition:all 0.2s;background:var(--cream3);
+}
+.case-thumb img{width:100%;height:100%;object-fit:cover;}
+.case-thumb.active{border-color:var(--rust);opacity:1;}
+.case-thumb:hover{opacity:0.85;}
+.case-thumb-label{
+  font-size:0.6rem;color:var(--ink3);text-align:center;margin-top:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:54px;
+}
+
+/* body sections */
+.case-body{padding:24px 40px 40px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.case-block{
+  background:var(--cream2);border:1px solid var(--border);border-radius:6px;
+  padding:18px 20px;
+}
+.case-block-label{font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--rust);margin-bottom:8px;}
+.case-block p{font-size:0.85rem;color:var(--ink2);line-height:1.7;}
+.case-block ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.case-block li{font-size:0.84rem;color:var(--ink2);padding-left:14px;position:relative;line-height:1.65;}
+.case-block li::before{content:"–";position:absolute;left:0;color:var(--rust);}
+.case-block.full{grid-column:1/-1;}
+.case-links-row{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+
+body.modal-locked{overflow:hidden;}
+
+@media(max-width:680px){
+  .case-header{padding:30px 22px 0;}
+  .case-gallery{padding:0 22px;}
+  .case-body{padding:20px 22px 32px;grid-template-columns:1fr;}
+  .case-title{font-size:1.5rem;}
+  .case-gallery-main{aspect-ratio:9/14;max-height:440px;}
+}
+
 /* ══════════
    RESPONSIVE
 ══════════ */
@@ -475,17 +722,28 @@ footer{
       Kanokchat Samansuk
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
       <li><span class="nav-sep"></span></li>
-      <li><a href="#skills">Skills</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
       <li><span class="nav-sep"></span></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
       <li><span class="nav-sep"></span></li>
-      <li><a href="#experience">Experience</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
       <li><span class="nav-sep"></span></li>
-      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications" data-i18n="nav.certs">Certs</a></li>
       <li><span class="nav-sep"></span></li>
-      <li><a href="ResumeKanokchat.pdf" target="_blank" rel="noopener" class="nav-cta">Resume ↗</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><span class="nav-sep"></span></li>
+      <li><a href="ResumeKanokchat.pdf" target="_blank" rel="noopener" class="nav-cta" data-i18n="nav.resume">Resume ↗</a></li>
+      <li><span class="nav-sep"></span></li>
+      <li><button class="lang-toggle" id="lang-btn" aria-label="Switch language">TH</button></li>
+      <li><span class="nav-sep"></span></li>
+      <li>
+        <button class="theme-toggle" id="theme-btn" aria-label="Toggle dark mode">
+          <span class="icon-moon">🌙</span>
+          <span class="icon-sun">☀️</span>
+        </button>
+      </li>
     </ul>
     <button class="hamburger" id="hbg" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -496,8 +754,20 @@ footer{
     <a href="#skills" onclick="closeMob()">Skills</a>
     <a href="#projects" onclick="closeMob()">Projects</a>
     <a href="#experience" onclick="closeMob()">Experience</a>
+    <a href="#certifications" onclick="closeMob()">Certifications</a>
     <a href="#education" onclick="closeMob()">Education</a>
     <a href="ResumeKanokchat.pdf" target="_blank" rel="noopener" class="m-cta" onclick="closeMob()">Resume ↗</a>
+    <div class="m-theme-row">
+      <span data-i18n="mob.lang">ภาษา / Language</span>
+      <button class="lang-toggle" id="lang-btn-mobile" aria-label="Switch language">TH</button>
+    </div>
+    <div class="m-theme-row">
+      <span>Dark mode</span>
+      <button class="theme-toggle" id="theme-btn-mobile" aria-label="Toggle dark mode">
+        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">☀️</span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -507,7 +777,7 @@ footer{
   <div class="hero-left">
     <div class="eyebrow fade-up">
       <span class="eyebrow-line"></span>
-      Open to work · Bangkok · Ayutthaya · Pathum Thani
+      <span data-i18n="hero.eyebrow">Open to work · Bangkok · Ayutthaya · Pathum Thani</span>
     </div>
     <h1 class="hero-name">
       <span class="line-reveal">Kanokchat</span>
@@ -515,19 +785,19 @@ footer{
     </h1>
     <p class="hero-role fade-up d1">
       <span class="role-dot"></span>
-      Junior Software Developer &nbsp;·&nbsp; Flutter · Firebase · FastAPI · AI
+      <span data-i18n="hero.role">Junior Software Developer &nbsp;·&nbsp; Flutter · Firebase · FastAPI · AI</span>
     </p>
-    <p class="hero-summary fade-up d2">
-      I build <strong>full-stack mobile and web apps</strong> — from Flutter mental health screening to <strong>AI-powered agricultural assistants</strong>. Hands-on with RAG pipelines, REST APIs, real-time databases, and computer vision. Completed an <strong>international research internship in Japan</strong> at Kagawa KOSEN (NITKC).
+    <p class="hero-summary fade-up d2" data-i18n="hero.summary">
+      I build <strong>full-stack mobile and web apps</strong> — from Flutter mental health screening to <strong>AI-powered agricultural assistants</strong>. Hands-on with RAG pipelines, REST APIs, real-time databases, and computer vision. Completed an <strong>international research internship in Japan</strong> at Kagawa KOSEN (NITKC) and an online international exchange with India.
     </p>
     <div class="hero-stats fade-up d2">
-      <div class="hstat"><div class="hstat-num">5+</div><div class="hstat-label">Projects</div></div>
-      <div class="hstat"><div class="hstat-num">🇯🇵</div><div class="hstat-label">Japan Internship</div></div>
-      <div class="hstat"><div class="hstat-num">3</div><div class="hstat-label">Months at KOSEN</div></div>
-      <div class="hstat"><div class="hstat-num">2026</div><div class="hstat-label">Graduating</div></div>
+      <div class="hstat"><div class="hstat-num">5+</div><div class="hstat-label" data-i18n="hero.stat1.label">Projects</div></div>
+      <div class="hstat"><div class="hstat-num">2</div><div class="hstat-label" data-i18n="hero.stat2.label">Int'l Programs</div></div>
+      <div class="hstat"><div class="hstat-num">3</div><div class="hstat-label" data-i18n="hero.stat3.label">Months at KOSEN</div></div>
+      <div class="hstat"><div class="hstat-num">2026</div><div class="hstat-label" data-i18n="hero.stat4.label">Graduated</div></div>
     </div>
     <div class="ctas fade-up d3">
-      <a href="mailto:kanokchat1602@gmail.com" class="btn btn-primary"><span>Contact me →</span></a>
+      <a href="mailto:kanokchat1602@gmail.com" class="btn btn-primary"><span data-i18n="hero.cta.contact">Contact me →</span></a>
       <a href="ResumeKanokchat.pdf" target="_blank" rel="noopener" class="btn btn-outline">Resume ↗</a>
       <a href="https://github.com/Kanokchat01" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
       <a href="https://linkedin.com/in/kanokchat-samansuk-2ab00a402" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
@@ -536,12 +806,12 @@ footer{
 
   <div class="hero-right fade-up d2">
     <div class="photo-frame">
-      <img src="profile-photo.jpg" alt="Kanokchat Samansuk" loading="eager"/>
+      <img src="profile-photo.jpg" alt="Kanokchat Samansuk — Kagawa Japan 2025" loading="eager"/>
       <div class="jp-tag">🇯🇵 Kagawa, Japan · 2025</div>
     </div>
     <div class="avail-row">
       <span class="avail-dot"></span>
-      Available for Junior Developer roles
+      <span data-i18n="hero.avail">Available for Junior Developer roles</span>
     </div>
   </div>
 </div>
@@ -553,24 +823,24 @@ footer{
 <section class="section" id="about">
   <div class="sec-header fade-up">
     <span class="sec-num">01</span>
-    <h2 class="sec-title">Who I <em>am</em></h2>
+    <h2 class="sec-title" data-i18n="about.title">Who I <em>am</em></h2>
   </div>
   <div class="about-grid">
     <div class="about-text fade-up">
-      <p>I'm a final-year student at Rajamangala University of Technology Thanyaburi (RMUTT), graduating in 2026 with a degree in Information Technology and Digital Communication.</p>
-      <p>My development experience spans Flutter mobile apps, Next.js/React frontends, FastAPI/Flask backends, Firebase cloud infrastructure, and AI integrations including RAG pipelines, TensorFlow Lite, and computer vision using PyTorch.</p>
-      <p>I also have hands-on IoT experience with NodeMCU ESP8266, ESP32, and Arduino for sensor and motor control systems.</p>
+      <p data-i18n="about.p1">I'm a recent IT graduate from Rajamangala University of Technology Thanyaburi (RMUTT), with a Bachelor's degree in Information Technology and Digital Communication (Graduated April 2026, GPA 2.90/4.00).</p>
+      <p data-i18n="about.p2">My development experience spans Flutter mobile apps, Next.js/React frontends, FastAPI/Flask backends, Firebase cloud infrastructure, and AI integrations including RAG pipelines, TensorFlow Lite, and computer vision using PyTorch.</p>
+      <p data-i18n="about.p3">I also have hands-on IoT experience with NodeMCU ESP8266, ESP32, and Arduino for sensor and motor control systems.</p>
       <div class="jp-callout">
         <span class="jp-callout-icon">🇯🇵</span>
-        <p>Selected for the <strong>Global Engineer Training Program</strong> at National Institute of Technology, Kagawa College (NITKC), Japan — September to December 2025. Developed an AI strawberry cultivation support system using RAG and computer vision.</p>
+        <p data-i18n="about.jp">Selected for the <strong>Global Engineer Training Program</strong> at National Institute of Technology, Kagawa College (NITKC), Japan — September to December 2025. Developed an AI strawberry cultivation support system using RAG and computer vision.</p>
       </div>
     </div>
     <div class="contact-list fade-up d1">
-      <div class="citem"><span class="citem-icon">📞</span><div><div class="citem-label">Phone</div><div class="citem-val">095-912-6758</div></div></div>
-      <div class="citem"><span class="citem-icon">✉️</span><div><div class="citem-label">Email</div><div class="citem-val"><a href="mailto:kanokchat1602@gmail.com">kanokchat1602@gmail.com</a></div></div></div>
-      <div class="citem"><span class="citem-icon">🐙</span><div><div class="citem-label">GitHub</div><div class="citem-val"><a href="https://github.com/Kanokchat01" target="_blank" rel="noopener">github.com/Kanokchat01</a></div></div></div>
-      <div class="citem"><span class="citem-icon">💼</span><div><div class="citem-label">LinkedIn</div><div class="citem-val"><a href="https://linkedin.com/in/kanokchat-samansuk-2ab00a402" target="_blank" rel="noopener">kanokchat-samansuk</a></div></div></div>
-      <div class="citem"><span class="citem-icon">📍</span><div><div class="citem-label">Location</div><div class="citem-val">Pathum Thani · Open to Bangkok / Ayutthaya</div></div></div>
+      <div class="citem"><span class="citem-icon">📞</span><div><div class="citem-label" data-i18n="contact.phone.label">Phone</div><div class="citem-val">095-912-6758</div></div></div>
+      <div class="citem"><span class="citem-icon">✉️</span><div><div class="citem-label" data-i18n="contact.email.label">Email</div><div class="citem-val"><a href="mailto:kanokchat1602@gmail.com">kanokchat1602@gmail.com</a></div></div></div>
+      <div class="citem"><span class="citem-icon">🐙</span><div><div class="citem-label" data-i18n="contact.github.label">GitHub</div><div class="citem-val"><a href="https://github.com/Kanokchat01" target="_blank" rel="noopener">github.com/Kanokchat01</a></div></div></div>
+      <div class="citem"><span class="citem-icon">💼</span><div><div class="citem-label" data-i18n="contact.linkedin.label">LinkedIn</div><div class="citem-val"><a href="https://linkedin.com/in/kanokchat-samansuk-2ab00a402" target="_blank" rel="noopener">kanokchat-samansuk</a></div></div></div>
+      <div class="citem"><span class="citem-icon">📍</span><div><div class="citem-label" data-i18n="contact.location.label">Location</div><div class="citem-val" data-i18n="contact.location.val">Pathum Thani · Open to Bangkok / Ayutthaya</div></div></div>
     </div>
   </div>
 </section>
@@ -581,17 +851,17 @@ footer{
 <section class="section" id="skills">
   <div class="sec-header fade-up">
     <span class="sec-num">02</span>
-    <h2 class="sec-title">Technical <em>toolkit</em></h2>
+    <h2 class="sec-title" data-i18n="skills.title">Technical <em>toolkit</em></h2>
   </div>
   <div class="skills-outer fade-up">
-    <div class="skill-cell"><div class="skill-cat">Mobile</div><div class="tags"><span class="tag accent">Flutter</span><span class="tag accent">Dart</span><span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">FCM Push</span><span class="tag">ML Kit</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">Frontend</div><div class="tags"><span class="tag accent">React</span><span class="tag accent">Next.js</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">Backend</div><div class="tags"><span class="tag accent">FastAPI</span><span class="tag accent">Flask</span><span class="tag">Node.js</span><span class="tag">PHP</span><span class="tag">REST API</span><span class="tag">Python</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">AI & Data</div><div class="tags"><span class="tag accent">RAG</span><span class="tag accent">FAISS</span><span class="tag">PyTorch</span><span class="tag">TFLite</span><span class="tag">Ollama</span><span class="tag">BLIP-2</span><span class="tag">Computer Vision</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">Database & Cloud</div><div class="tags"><span class="tag">Firebase</span><span class="tag">Firestore</span><span class="tag">MySQL</span><span class="tag muted">SQL</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">IoT</div><div class="tags"><span class="tag muted">NodeMCU ESP8266</span><span class="tag muted">ESP32</span><span class="tag muted">Arduino</span><span class="tag muted">Sensor & Motor</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">Core Languages</div><div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">Dart</span><span class="tag muted">SQL</span></div></div>
-    <div class="skill-cell"><div class="skill-cat">Tools</div><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span><span class="tag">Notion</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.mobile">Mobile</div><div class="tags"><span class="tag accent">Flutter</span><span class="tag accent">Dart</span><span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">FCM Push</span><span class="tag">ML Kit</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.frontend">Frontend</div><div class="tags"><span class="tag accent">React</span><span class="tag accent">Next.js</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.backend">Backend</div><div class="tags"><span class="tag accent">FastAPI</span><span class="tag accent">Flask</span><span class="tag">Node.js</span><span class="tag">PHP</span><span class="tag">REST API</span><span class="tag">Python</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.ai">AI & Data</div><div class="tags"><span class="tag accent">RAG</span><span class="tag accent">FAISS</span><span class="tag">PyTorch</span><span class="tag">TFLite</span><span class="tag">Ollama</span><span class="tag">BLIP-2</span><span class="tag">Computer Vision</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.db">Database & Cloud</div><div class="tags"><span class="tag">Firebase</span><span class="tag">Firestore</span><span class="tag">MySQL</span><span class="tag muted">SQL</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.iot">IoT</div><div class="tags"><span class="tag muted">NodeMCU ESP8266</span><span class="tag muted">ESP32</span><span class="tag muted">Arduino</span><span class="tag muted">Sensor & Motor</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.lang">Core Languages</div><div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">Dart</span><span class="tag muted">SQL</span></div></div>
+    <div class="skill-cell"><div class="skill-cat" data-i18n="skill.tools">Tools</div><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span><span class="tag">Notion</span></div></div>
   </div>
 </section>
 
@@ -601,87 +871,94 @@ footer{
 <section class="section" id="projects">
   <div class="sec-header fade-up">
     <span class="sec-num">03</span>
-    <h2 class="sec-title">Selected <em>work</em></h2>
-  </div>
-  <div class="cert-bar fade-up">
-    <span class="cert-bar-icon">🏅</span>
-    <div class="cert-bar-body">
-      <div class="cert-bar-title">Certificate of Completion — Global Engineer Training Program</div>
-      <div class="cert-bar-sub">National Institute of Technology, Kagawa College (NITKC) · Sep 11 – Dec 9, 2025 · Signed by Dr. Nobuo Araki, President</div>
-    </div>
-    <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="cert-bar-link">View ↗</a>
+    <h2 class="sec-title" data-i18n="proj.title">Selected <em>work</em></h2>
   </div>
   <div class="proj-list fade-up">
-    <article class="proj-card">
+    <article class="proj-card" data-case="jitdee">
       <div>
-        <div class="proj-meta"><span class="proj-year-tag">2025</span><span class="proj-badge">Mental Health App</span></div>
+        <div class="proj-meta"><span class="proj-year-tag">2025</span><span class="proj-badge" data-i18n="proj.jitdee.badge">Mental Health App</span></div>
         <div class="proj-name">JitDee</div>
-        <div class="proj-org">Full-stack Mental Health Screening App</div>
+        <div class="proj-org" data-i18n="proj.jitdee.org">Full-stack Mental Health Screening App</div>
         <div class="proj-stack"><span class="tag accent">Flutter</span><span class="tag accent">Firebase</span><span class="tag">Firestore</span><span class="tag">TFLite</span><span class="tag">ML Kit</span><span class="tag">FCM</span></div>
-        <p class="proj-desc">Production-grade mobile app with PHQ-9 assessment, deep mental health workflow, appointment requests, and role-based access for patients and clinicians.</p>
+        <p class="proj-desc" data-i18n="proj.jitdee.desc">Production-grade mobile app with PHQ-9 assessment, deep mental health workflow, appointment requests, and role-based access for patients and clinicians.</p>
         <ul class="proj-bullets">
-          <li>Role-based flow (patient / clinician) using Firebase Auth + Firestore rules</li>
-          <li>Real-time appointment tracking and push notifications via Firebase Cloud Messaging</li>
-          <li>On-device emotion detection using TFLite + ML Kit with isolate-based threading</li>
+          <li data-i18n="proj.jitdee.b1">Role-based flow (patient / clinician) using Firebase Auth + Firestore rules</li>
+          <li data-i18n="proj.jitdee.b2">Real-time appointment tracking and push notifications via Firebase Cloud Messaging</li>
+          <li data-i18n="proj.jitdee.b3">On-device emotion detection using TFLite + ML Kit with isolate-based threading</li>
         </ul>
-        <div class="proj-links"><a href="https://github.com/Kanokchat01/Jit_App" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a></div>
+        <div class="proj-links">
+          <button class="link-btn case-trigger" data-case="jitdee" data-i18n="proj.case">Case Study ↗</button>
+          <a href="https://github.com/Kanokchat01/Jit_App" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
+        </div>
       </div>
       <div class="proj-num-big">01</div>
     </article>
     <article class="proj-card">
       <div>
-        <div class="proj-meta"><span class="proj-year-tag">2025 · Japan 🇯🇵</span><span class="proj-badge">AI Research</span></div>
+        <div class="proj-meta"><span class="proj-year-tag" data-i18n="proj.agri.year">2025 · Japan 🇯🇵</span><span class="proj-badge" data-i18n="proj.agri.badge">AI Research</span></div>
         <div class="proj-name">Agri-Hacks</div>
-        <div class="proj-org">AI Agricultural Knowledge Assistant · Kagawa KOSEN (NITKC)</div>
+        <div class="proj-org" data-i18n="proj.agri.org">AI Agricultural Knowledge Assistant · Kagawa KOSEN (NITKC)</div>
         <div class="proj-stack"><span class="tag accent">Next.js</span><span class="tag accent">FastAPI</span><span class="tag">Flask</span><span class="tag">PyTorch</span><span class="tag">FAISS</span><span class="tag">Ollama</span><span class="tag">BLIP-2</span></div>
-        <p class="proj-desc">AI-powered assistant for strawberry cultivation knowledge retrieval, built during a 3-month research internship at NITKC, Japan.</p>
+        <p class="proj-desc" data-i18n="proj.agri.desc">AI-powered assistant for strawberry cultivation knowledge retrieval, built during a 3-month research internship at NITKC, Japan.</p>
         <ul class="proj-bullets">
-          <li>RAG pipeline using FAISS, E5 embeddings, and Gemma2 via Ollama for domain-specific retrieval</li>
-          <li>Backend APIs with FastAPI/Flask and computer vision with PyTorch + BLIP-2</li>
-          <li>Multi-module architecture: ChatBot (Next.js), LLMServer (Flask), FrameCompletion, EyeCamera, HMD</li>
-          <li>Cross-national 5-person research team; presented to faculty at NITKC</li>
+          <li data-i18n="proj.agri.b1">RAG pipeline using FAISS, E5 embeddings, and Gemma2 via Ollama for domain-specific retrieval</li>
+          <li data-i18n="proj.agri.b2">Backend APIs with FastAPI/Flask and computer vision with PyTorch + BLIP-2</li>
+          <li data-i18n="proj.agri.b3">Multi-module architecture: ChatBot (Next.js), LLMServer (Flask), FrameCompletion, EyeCamera, HMD</li>
+          <li data-i18n="proj.agri.b4">Cross-national 5-person research team; presented to faculty at NITKC</li>
         </ul>
-        <div class="proj-links"><a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="link-btn">Certificate ↗</a></div>
+        <div class="proj-links">
+          <button class="link-btn case-trigger" data-case="agrihacks" data-i18n="proj.case">Case Study ↗</button>
+          <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="link-btn" data-i18n="proj.cert">Certificate ↗</a>
+        </div>
       </div>
       <div class="proj-num-big">02</div>
     </article>
     <article class="proj-card">
       <div>
-        <div class="proj-meta"><span class="proj-year-tag">2024</span><span class="proj-badge">Social Media</span></div>
+        <div class="proj-meta"><span class="proj-year-tag">2024</span><span class="proj-badge" data-i18n="proj.social.badge">Social Media</span></div>
         <div class="proj-name">Social Network App</div>
-        <div class="proj-org">Flutter-based Mobile Social Media Application</div>
+        <div class="proj-org" data-i18n="proj.social.org">Flutter-based Mobile Social Media Application</div>
         <div class="proj-stack"><span class="tag accent">Flutter</span><span class="tag">Dart</span><span class="tag">PHP REST API</span><span class="tag">MySQL</span></div>
-        <p class="proj-desc">Full-featured social media app with authentication, CRUD, chat, and multimedia content.</p>
+        <p class="proj-desc" data-i18n="proj.social.desc">Full-featured social media app with authentication, CRUD, chat, and multimedia content.</p>
         <ul class="proj-bullets">
-          <li>Built user, post, media, and chat management with PHP REST APIs and MySQL</li>
-          <li>Connected Flutter frontend to backend with structured API layer</li>
+          <li data-i18n="proj.social.b1">Built user, post, media, and chat management with PHP REST APIs and MySQL</li>
+          <li data-i18n="proj.social.b2">Connected Flutter frontend to backend with structured API layer</li>
         </ul>
-        <div class="proj-links"><a href="https://github.com/Kanokchat01/Project" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a></div>
+        <div class="proj-links">
+          <button class="link-btn case-trigger" data-case="social" data-i18n="proj.case">Case Study ↗</button>
+          <a href="https://github.com/Kanokchat01/Project" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
+        </div>
       </div>
       <div class="proj-num-big">03</div>
     </article>
     <article class="proj-card">
       <div>
-        <div class="proj-meta"><span class="proj-year-tag">2023</span><span class="proj-badge">Web App</span></div>
+        <div class="proj-meta"><span class="proj-year-tag">2023</span><span class="proj-badge" data-i18n="proj.print.badge">Web App</span></div>
         <div class="proj-name">Web Print Store</div>
-        <div class="proj-org">Full-stack E-commerce Web Project</div>
+        <div class="proj-org" data-i18n="proj.print.org">Full-stack E-commerce Web Project</div>
         <div class="proj-stack"><span class="tag">Node.js</span><span class="tag">JavaScript</span><span class="tag">EJS</span><span class="tag">CSS</span></div>
-        <p class="proj-desc">Early full-stack web project with product/order flow and file handling — demonstrates foundation in server-side rendering and web architecture.</p>
+        <p class="proj-desc" data-i18n="proj.print.desc">Early full-stack web project with product/order flow and file handling — demonstrates foundation in server-side rendering and web architecture.</p>
         <ul class="proj-bullets">
-          <li>Built views, routes, uploads, images, and order pages using Node.js + EJS</li>
-          <li>GitHub version-controlled from the start</li>
+          <li data-i18n="proj.print.b1">Built views, routes, uploads, images, and order pages using Node.js + EJS</li>
+          <li data-i18n="proj.print.b2">GitHub version-controlled from the start</li>
         </ul>
-        <div class="proj-links"><a href="https://github.com/Kanokchat01/web_printstore" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a></div>
+        <div class="proj-links">
+          <button class="link-btn case-trigger" data-case="printstore" data-i18n="proj.case">Case Study ↗</button>
+          <a href="https://github.com/Kanokchat01/web_printstore" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
+        </div>
       </div>
       <div class="proj-num-big">04</div>
     </article>
     <article class="proj-card">
       <div>
-        <div class="proj-meta"><span class="proj-year-tag">2021</span><span class="proj-badge">IoT</span></div>
+        <div class="proj-meta"><span class="proj-year-tag">2021</span><span class="proj-badge" data-i18n="proj.iot.badge">IoT</span></div>
         <div class="proj-name">Electrical Control System</div>
-        <div class="proj-org">Real-time IoT Device Control</div>
+        <div class="proj-org" data-i18n="proj.iot.org">Real-time IoT Device Control</div>
         <div class="proj-stack"><span class="tag muted">NodeMCU ESP8266</span><span class="tag muted">Firebase</span><span class="tag muted">Relay Modules</span><span class="tag muted">IoT</span></div>
-        <p class="proj-desc">IoT system for real-time electrical device control using NodeMCU ESP8266, Firebase Realtime Database, and relay modules.</p>
+        <p class="proj-desc" data-i18n="proj.iot.desc">IoT system for real-time electrical device control using NodeMCU ESP8266, Firebase Realtime Database, and relay modules.</p>
+        <div class="proj-links">
+          <button class="link-btn case-trigger" data-case="iot" data-i18n="proj.case">Case Study ↗</button>
+        </div>
       </div>
       <div class="proj-num-big">05</div>
     </article>
@@ -694,23 +971,23 @@ footer{
 <section class="section" id="experience">
   <div class="sec-header fade-up">
     <span class="sec-num">04</span>
-    <h2 class="sec-title">Work <em>history</em></h2>
+    <h2 class="sec-title" data-i18n="exp.title">Work <em>history</em></h2>
   </div>
   <div class="fade-up">
     <div class="exp-item">
       <div>
         <div class="exp-flag">🇯🇵</div>
-        <div class="exp-dates">Sep 11 – Dec 9<br>2025</div>
+        <div class="exp-dates" data-i18n="exp.dates">Sep 11 – Dec 9<br>2025</div>
       </div>
       <div>
-        <div class="exp-role">Research Assistant — International Internship</div>
-        <div class="exp-org">National Institute of Technology, Kagawa College (NITKC) · Japan</div>
+        <div class="exp-role" data-i18n="exp.role">Research Assistant — International Internship</div>
+        <div class="exp-org" data-i18n="exp.org">National Institute of Technology, Kagawa College (NITKC) · Japan</div>
         <ul class="exp-bullets">
-          <li>Selected for the Global Engineer Training Program at NITKC</li>
-          <li>Built an AI knowledge assistant for strawberry farming using RAG, FAISS, and Gemma2 LLM</li>
-          <li>Developed backend APIs (FastAPI/Flask) and computer vision features (PyTorch, BLIP-2)</li>
-          <li>Collaborated in an international cross-national research team; presented to faculty</li>
-          <li>Certificate issued by Dr. Nobuo Araki, President of NITKC, December 9, 2025</li>
+          <li data-i18n="exp.b1">Selected for the Global Engineer Training Program at NITKC</li>
+          <li data-i18n="exp.b2">Built an AI knowledge assistant for strawberry farming using RAG, FAISS, and Gemma2 LLM</li>
+          <li data-i18n="exp.b3">Developed backend APIs (FastAPI/Flask) and computer vision features (PyTorch, BLIP-2)</li>
+          <li data-i18n="exp.b4">Collaborated in an international cross-national research team; presented to faculty</li>
+          <li data-i18n="exp.b5">Certificate issued by Dr. Nobuo Araki, President of NITKC, December 9, 2025</li>
         </ul>
       </div>
     </div>
@@ -719,51 +996,180 @@ footer{
 
 <div class="divider"></div>
 
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="sec-header fade-up">
+    <span class="sec-num">05</span>
+    <h2 class="sec-title" data-i18n="cert.title">Certifi<em>cations</em></h2>
+  </div>
+  <div class="cert-grid fade-up">
+
+    <article class="cert-card">
+      <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="cert-thumb-wrap">
+        <img src="certs/cert_japan.jpg" alt="Certificate of Completion — Global Engineer Training Program, NITKC Japan" loading="lazy"/>
+        <span class="cert-flag">🇯🇵 Japan</span>
+      </a>
+      <div class="cert-card-body">
+        <span class="cert-pill" data-i18n="cert.jp.pill">Internship Program</span>
+        <h3 class="cert-card-title" data-i18n="cert.jp.title">Global Engineer Training Program</h3>
+        <p class="cert-card-org" data-i18n="cert.jp.org">National Institute of Technology, Kagawa College (NITKC)</p>
+        <div class="cert-card-meta" data-i18n="cert.jp.meta">Sep 11 – Dec 9, 2025</div>
+        <div class="cert-card-tags">
+          <span class="cert-tag">AI</span><span class="cert-tag">AgriTech</span><span class="cert-tag">Research</span>
+        </div>
+        <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="cert-card-link" data-i18n="cert.view">View Certificate ↗</a>
+      </div>
+    </article>
+
+    <article class="cert-card">
+      <a href="KANOKCHAT_SAMANSUK_Student_Faculty_Exchange_Certificate_2024-25.pdf" target="_blank" rel="noopener" class="cert-thumb-wrap">
+        <img src="certs/cert_india.jpg" alt="Certificate of Completion — Student-Faculty Exchange Program, Mumbai India" loading="lazy"/>
+        <span class="cert-flag">🌐 Online · India</span>
+      </a>
+      <div class="cert-card-body">
+        <span class="cert-pill" data-i18n="cert.india.pill">Academic Exchange</span>
+        <h3 class="cert-card-title" data-i18n="cert.india.title">Student-Faculty Exchange Program</h3>
+        <p class="cert-card-org" data-i18n="cert.india.org">Patkar-Varde College (Autonomous), Mumbai, India</p>
+        <div class="cert-card-meta" data-i18n="cert.india.meta">Apr 23–29, 2025 · Score 38/50</div>
+        <div class="cert-card-tags">
+          <span class="cert-tag">IT</span><span class="cert-tag">Computer Science</span><span class="cert-tag">Cross-cultural</span>
+        </div>
+        <a href="KANOKCHAT_SAMANSUK_Student_Faculty_Exchange_Certificate_2024-25.pdf" target="_blank" rel="noopener" class="cert-card-link" data-i18n="cert.view">View Certificate ↗</a>
+      </div>
+    </article>
+
+    <article class="cert-card">
+      <a href="089Kanokchat__Samansuk.pdf" target="_blank" rel="noopener" class="cert-thumb-wrap">
+        <img src="certs/cert_cabling.jpg" alt="Certificate of Attendance — Cabling Contest Training #12" loading="lazy"/>
+        <span class="cert-flag">🏅 Thailand</span>
+      </a>
+      <div class="cert-card-body">
+        <span class="cert-pill" data-i18n="cert.cable.pill">Technical Training</span>
+        <h3 class="cert-card-title" data-i18n="cert.cable.title">Cabling Contest Training #12</h3>
+        <p class="cert-card-org" data-i18n="cert.cable.org">Interlink Certify · American Standard</p>
+        <div class="cert-card-meta" data-i18n="cert.cable.meta">2024</div>
+        <div class="cert-card-tags">
+          <span class="cert-tag">Networking</span><span class="cert-tag">Structured Cabling</span>
+        </div>
+        <a href="089Kanokchat__Samansuk.pdf" target="_blank" rel="noopener" class="cert-card-link" data-i18n="cert.view">View Certificate ↗</a>
+      </div>
+    </article>
+
+    <article class="cert-card">
+      <a href="certs/cert_kmitl_iot.jpg" target="_blank" rel="noopener" class="cert-thumb-wrap">
+        <img src="certs/cert_kmitl_iot.jpg" alt="K-Engineering World Workshop 2021 — IoT and Information Systems Engineering" loading="lazy"/>
+        <span class="cert-flag">🛠️ KMITL</span>
+      </a>
+      <div class="cert-card-body">
+        <span class="cert-pill" data-i18n="cert.kmitl1.pill">Workshop</span>
+        <h3 class="cert-card-title" data-i18n="cert.kmitl1.title">K-Engineering World Workshop 2021</h3>
+        <p class="cert-card-org" data-i18n="cert.kmitl1.org">School of Engineering, King Mongkut's Institute of Technology Ladkrabang (KMITL)</p>
+        <div class="cert-card-meta" data-i18n="cert.kmitl1.meta">IoT &amp; Information Systems Engineering · Nov 7, 2021</div>
+        <div class="cert-card-tags">
+          <span class="cert-tag">IoT</span><span class="cert-tag">Information Systems</span>
+        </div>
+        <a href="certs/cert_kmitl_iot.jpg" target="_blank" rel="noopener" class="cert-card-link" data-i18n="cert.view">View Certificate ↗</a>
+      </div>
+    </article>
+
+    <article class="cert-card">
+      <a href="certs/cert_kmitl_sw.jpg" target="_blank" rel="noopener" class="cert-thumb-wrap">
+        <img src="certs/cert_kmitl_sw.jpg" alt="K-Engineering World Workshop 2021 — Software Engineering" loading="lazy"/>
+        <span class="cert-flag">🛠️ KMITL</span>
+      </a>
+      <div class="cert-card-body">
+        <span class="cert-pill">Workshop</span>
+        <h3 class="cert-card-title">K-Engineering World Workshop 2021</h3>
+        <p class="cert-card-org">School of Engineering, King Mongkut's Institute of Technology Ladkrabang (KMITL)</p>
+        <div class="cert-card-meta" data-i18n="cert.kmitl2.meta">Software Engineering · Nov 7, 2021</div>
+        <div class="cert-card-tags">
+          <span class="cert-tag">Software Engineering</span>
+        </div>
+        <a href="certs/cert_kmitl_sw.jpg" target="_blank" rel="noopener" class="cert-card-link" data-i18n="cert.view">View Certificate ↗</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- EDUCATION -->
 <section class="section" id="education">
   <div class="sec-header fade-up">
-    <span class="sec-num">05</span>
-    <h2 class="sec-title">Academic <em>background</em></h2>
+    <span class="sec-num">06</span>
+    <h2 class="sec-title" data-i18n="edu.title">Academic <em>background</em></h2>
   </div>
   <div class="edu-block fade-up">
     <div class="edu-main">
       <div class="edu-icon">🎓</div>
-      <div class="edu-degree">Bachelor's in Information Technology and Digital Communication</div>
-      <div class="edu-school">Rajamangala University of Technology Thanyaburi (RMUTT)</div>
-      <div class="edu-detail">GPAX: 2.90 / 4.00 </div>
-      <div class="edu-detail" style="margin-top:3px;">Faculty of Science and Technology · Pathum Thani</div>
+      <div class="edu-degree" data-i18n="edu.degree">Bachelor's in Information Technology and Digital Communication</div>
+      <div class="edu-school" data-i18n="edu.school">Rajamangala University of Technology Thanyaburi (RMUTT)</div>
+      <div class="edu-detail" data-i18n="edu.detail1">GPA: 2.90 / 4.00</div>
+      <div class="edu-detail" style="margin-top:3px;" data-i18n="edu.detail2">Faculty of Science and Technology · Pathum Thani</div>
     </div>
     <div class="edu-jp">
       <div>
-        <div class="edu-jp-top">Global Engineer Training Program</div>
-        <div class="edu-jp-sub">National Institute of Technology, Kagawa College (NITKC)</div>
-        <div class="edu-jp-date">3 months · September – December 2025 · Kagawa, Japan</div>
+        <div class="edu-jp-top" data-i18n="edu.jp.top">Global Engineer Training Program</div>
+        <div class="edu-jp-sub" data-i18n="edu.jp.sub">National Institute of Technology, Kagawa College (NITKC)</div>
+        <div class="edu-jp-date" data-i18n="edu.jp.date">3 months · September – December 2025 · Kagawa, Japan</div>
       </div>
-      <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="cert-bar-link" style="align-self:flex-start;">View Certificate ↗</a>
+      <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="cert-bar-link" style="align-self:flex-start;" data-i18n="edu.jp.link">View Certificate ↗</a>
     </div>
   </div>
   <div class="soft-row fade-up">
-    <span class="soft-pill">Problem Solving</span>
-    <span class="soft-pill">Critical Thinking</span>
-    <span class="soft-pill">Adaptability</span>
-    <span class="soft-pill">Teamwork</span>
-    <span class="soft-pill">Responsibility</span>
-    <span class="soft-pill">Thai — Native</span>
-    <span class="soft-pill">English — Basic to Intermediate</span>
+    <span class="soft-pill" data-i18n="soft.1">Problem Solving</span>
+    <span class="soft-pill" data-i18n="soft.2">Critical Thinking</span>
+    <span class="soft-pill" data-i18n="soft.3">Adaptability</span>
+    <span class="soft-pill" data-i18n="soft.4">Teamwork</span>
+    <span class="soft-pill" data-i18n="soft.5">Responsibility</span>
+    <span class="soft-pill" data-i18n="soft.6">Thai — Native</span>
+    <span class="soft-pill" data-i18n="soft.7">English — Intermediate (CEFR B1 · RT-TEP 4.0)</span>
   </div>
 </section>
 </div>
 </main>
 
+<!-- CASE STUDY MODAL -->
+<div class="case-overlay" id="case-overlay">
+  <div class="case-modal" id="case-modal">
+    <button class="case-close" id="case-close" aria-label="Close">✕</button>
+    <div class="case-header">
+      <div class="case-eyebrow" id="case-eyebrow"></div>
+      <h3 class="case-title" id="case-title"></h3>
+      <p class="case-sub" id="case-sub"></p>
+      <div class="case-stack-row" id="case-stack"></div>
+    </div>
+    <div class="case-video-wrap" id="case-video-wrap" style="display:none;">
+      <div class="case-video-label">🎬 Demo Video</div>
+      <div class="case-video-card">
+        <iframe class="case-video-player" id="case-video" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="case-gallery" id="case-gallery-wrap" style="display:none;">
+      <div class="case-gallery-main">
+        <button class="gal-arrow gal-prev" id="gal-prev" aria-label="Previous">‹</button>
+        <img id="gal-main-img" src="" alt=""/>
+        <button class="gal-arrow gal-next" id="gal-next" aria-label="Next">›</button>
+        <span class="gal-counter" id="gal-counter"></span>
+      </div>
+      <div class="case-thumbs" id="case-thumbs"></div>
+    </div>
+    <div class="case-body" id="case-body"></div>
+  </div>
+</div>
+
 <div class="divider" style="max-width:var(--max);margin:0 auto;position:relative;z-index:1;"></div>
 <footer>
   <div>
     <div class="footer-name">Kanokchat Samansuk</div>
-    <div class="footer-sub">Junior Software Developer · Bangkok / Ayutthaya / Pathum Thani</div>
+    <div class="footer-sub" data-i18n="footer.sub">Junior Software Developer · Bangkok / Ayutthaya / Pathum Thani</div>
   </div>
   <div class="footer-links">
-    <a href="mailto:kanokchat1602@gmail.com">Email</a>
-    <a href="ResumeKanokchat.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="mailto:kanokchat1602@gmail.com" data-i18n="footer.email">Email</a>
+    <a href="ResumeKanokchat.pdf" target="_blank" rel="noopener" data-i18n="footer.resume">Resume</a>
     <a href="https://github.com/Kanokchat01" target="_blank" rel="noopener">GitHub</a>
     <a href="https://linkedin.com/in/kanokchat-samansuk-2ab00a402" target="_blank" rel="noopener">LinkedIn</a>
   </div>
@@ -788,6 +1194,482 @@ footer{
   hbg.addEventListener('click',()=>{const o=mob.classList.toggle('open');hbg.classList.toggle('open',o);hbg.setAttribute('aria-expanded',o);});
   function closeMob(){mob.classList.remove('open');hbg.classList.remove('open');hbg.setAttribute('aria-expanded',false);}
   window.addEventListener('scroll',()=>{if(mob.classList.contains('open'))closeMob();},{passive:true});
+
+  /* dark mode toggle */
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme',t);
+    try{localStorage.setItem('ks-theme',t);}catch(e){}
+  }
+  function toggleTheme(){
+    const cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    setTheme(cur);
+  }
+  document.getElementById('theme-btn').addEventListener('click',toggleTheme);
+  document.getElementById('theme-btn-mobile').addEventListener('click',toggleTheme);
+
+  /* ── LANGUAGE ── */
+  const LANG = {
+    en: {
+      'nav.about':'About','nav.skills':'Skills','nav.projects':'Projects',
+      'nav.experience':'Experience','nav.certs':'Certs','nav.education':'Education','nav.resume':'Resume ↗',
+      'mob.lang':'Language',
+      'hero.eyebrow':'Open to work · Bangkok · Ayutthaya · Pathum Thani',
+      'hero.role':'Junior Software Developer &nbsp;·&nbsp; Flutter · Firebase · FastAPI · AI',
+      'hero.summary':'I build <strong>full-stack mobile and web apps</strong> — from Flutter mental health screening to <strong>AI-powered agricultural assistants</strong>. Hands-on with RAG pipelines, REST APIs, real-time databases, and computer vision. Completed an <strong>international research internship in Japan</strong> at Kagawa KOSEN (NITKC) and an online international exchange with India.',
+      'hero.stat1.label':'Projects','hero.stat2.label':'Int\'l Programs',
+      'hero.stat3.label':'Months at KOSEN','hero.stat4.label':'Graduated',
+      'hero.cta.contact':'Contact me →','hero.avail':'Available for Junior Developer roles',
+      'about.title':'Who I <em>am</em>',
+      'about.p1':'I\'m a recent IT graduate from Rajamangala University of Technology Thanyaburi (RMUTT), with a Bachelor\'s degree in Information Technology and Digital Communication (Graduated April 2026, GPA 2.90/4.00).',
+      'about.p2':'My development experience spans Flutter mobile apps, Next.js/React frontends, FastAPI/Flask backends, Firebase cloud infrastructure, and AI integrations including RAG pipelines, TensorFlow Lite, and computer vision using PyTorch.',
+      'about.p3':'I also have hands-on IoT experience with NodeMCU ESP8266, ESP32, and Arduino for sensor and motor control systems.',
+      'about.jp':'Selected for the <strong>Global Engineer Training Program</strong> at National Institute of Technology, Kagawa College (NITKC), Japan — September to December 2025. Developed an AI strawberry cultivation support system using RAG and computer vision.',
+      'contact.phone.label':'Phone','contact.email.label':'Email','contact.github.label':'GitHub',
+      'contact.linkedin.label':'LinkedIn','contact.location.label':'Location',
+      'contact.location.val':'Pathum Thani · Open to Bangkok / Ayutthaya',
+      'skills.title':'Technical <em>toolkit</em>',
+      'skill.mobile':'Mobile','skill.frontend':'Frontend','skill.backend':'Backend',
+      'skill.ai':'AI & Data','skill.db':'Database & Cloud','skill.iot':'IoT',
+      'skill.lang':'Core Languages','skill.tools':'Tools',
+      'proj.title':'Selected <em>work</em>',
+      'proj.jitdee.badge':'Mental Health App','proj.jitdee.org':'Full-stack Mental Health Screening App',
+      'proj.jitdee.desc':'Production-grade mobile app with PHQ-9 assessment, deep mental health workflow, appointment requests, and role-based access for patients and clinicians.',
+      'proj.jitdee.b1':'Role-based flow (patient / clinician) using Firebase Auth + Firestore rules',
+      'proj.jitdee.b2':'Real-time appointment tracking and push notifications via Firebase Cloud Messaging',
+      'proj.jitdee.b3':'On-device emotion detection using TFLite + ML Kit with isolate-based threading',
+      'proj.case':'Case Study ↗','proj.cert':'Certificate ↗',
+      'proj.agri.year':'2025 · Japan 🇯🇵','proj.agri.badge':'AI Research',
+      'proj.agri.org':'AI Agricultural Knowledge Assistant · Kagawa KOSEN (NITKC)',
+      'proj.agri.desc':'AI-powered assistant for strawberry cultivation knowledge retrieval, built during a 3-month research internship at NITKC, Japan.',
+      'proj.agri.b1':'RAG pipeline using FAISS, E5 embeddings, and Gemma2 via Ollama for domain-specific retrieval',
+      'proj.agri.b2':'Backend APIs with FastAPI/Flask and computer vision with PyTorch + BLIP-2',
+      'proj.agri.b3':'Multi-module architecture: ChatBot (Next.js), LLMServer (Flask), FrameCompletion, EyeCamera, HMD',
+      'proj.agri.b4':'Cross-national 5-person research team; presented to faculty at NITKC',
+      'proj.social.badge':'Social Media','proj.social.org':'Flutter-based Mobile Social Media Application',
+      'proj.social.desc':'Full-featured social media app with authentication, CRUD, chat, and multimedia content.',
+      'proj.social.b1':'Built user, post, media, and chat management with PHP REST APIs and MySQL',
+      'proj.social.b2':'Connected Flutter frontend to backend with structured API layer',
+      'proj.print.badge':'Web App','proj.print.org':'Full-stack E-commerce Web Project',
+      'proj.print.desc':'Early full-stack web project with product/order flow and file handling — demonstrates foundation in server-side rendering and web architecture.',
+      'proj.print.b1':'Built views, routes, uploads, images, and order pages using Node.js + EJS',
+      'proj.print.b2':'GitHub version-controlled from the start',
+      'proj.iot.badge':'IoT','proj.iot.org':'Real-time IoT Device Control',
+      'proj.iot.desc':'IoT system for real-time electrical device control using NodeMCU ESP8266, Firebase Realtime Database, and relay modules.',
+      'exp.title':'Work <em>history</em>',
+      'exp.dates':'Sep 11 – Dec 9<br>2025',
+      'exp.role':'Research Assistant — International Internship',
+      'exp.org':'National Institute of Technology, Kagawa College (NITKC) · Japan',
+      'exp.b1':'Selected for the Global Engineer Training Program at NITKC',
+      'exp.b2':'Built an AI knowledge assistant for strawberry farming using RAG, FAISS, and Gemma2 LLM',
+      'exp.b3':'Developed backend APIs (FastAPI/Flask) and computer vision features (PyTorch, BLIP-2)',
+      'exp.b4':'Collaborated in an international cross-national research team; presented to faculty',
+      'exp.b5':'Certificate issued by Dr. Nobuo Araki, President of NITKC, December 9, 2025',
+      'cert.title':'Certifi<em>cations</em>','cert.view':'View Certificate ↗',
+      'cert.jp.pill':'Internship Program','cert.jp.title':'Global Engineer Training Program',
+      'cert.jp.org':'National Institute of Technology, Kagawa College (NITKC)','cert.jp.meta':'Sep 11 – Dec 9, 2025',
+      'cert.india.pill':'Academic Exchange','cert.india.title':'Student-Faculty Exchange Program',
+      'cert.india.org':'Patkar-Varde College (Autonomous), Mumbai, India','cert.india.meta':'Apr 23–29, 2025 · Score 38/50',
+      'cert.cable.pill':'Technical Training','cert.cable.title':'Cabling Contest Training #12',
+      'cert.cable.org':'Interlink Certify · American Standard','cert.cable.meta':'2024',
+      'cert.kmitl1.pill':'Workshop','cert.kmitl1.title':'K-Engineering World Workshop 2021',
+      'cert.kmitl1.org':"School of Engineering, King Mongkut's Institute of Technology Ladkrabang (KMITL)",
+      'cert.kmitl1.meta':'IoT & Information Systems Engineering · Nov 7, 2021',
+      'cert.kmitl2.meta':'Software Engineering · Nov 7, 2021',
+      'edu.title':'Academic <em>background</em>',
+      'edu.degree':"Bachelor's in Information Technology and Digital Communication",
+      'edu.school':'Rajamangala University of Technology Thanyaburi (RMUTT)',
+      'edu.detail1':'GPA: 2.90 / 4.00','edu.detail2':'Faculty of Science and Technology · Pathum Thani',
+      'edu.jp.top':'Global Engineer Training Program',
+      'edu.jp.sub':'National Institute of Technology, Kagawa College (NITKC)',
+      'edu.jp.date':'3 months · September – December 2025 · Kagawa, Japan',
+      'edu.jp.link':'View Certificate ↗',
+      'soft.1':'Problem Solving','soft.2':'Critical Thinking','soft.3':'Adaptability',
+      'soft.4':'Teamwork','soft.5':'Responsibility','soft.6':'Thai — Native',
+      'soft.7':'English — Intermediate (CEFR B1 · RT-TEP 4.0)',
+      'footer.sub':'Junior Software Developer · Bangkok / Ayutthaya / Pathum Thani',
+      'footer.email':'Email','footer.resume':'Resume',
+    },
+    th: {
+      'nav.about':'เกี่ยวกับ','nav.skills':'ทักษะ','nav.projects':'ผลงาน',
+      'nav.experience':'ประสบการณ์','nav.certs':'ใบรับรอง','nav.education':'การศึกษา','nav.resume':'เรซูเม่ ↗',
+      'mob.lang':'ภาษา / Language',
+      'hero.eyebrow':'เปิดรับงาน · กรุงเทพฯ · อยุธยา · ปทุมธานี',
+      'hero.role':'นักพัฒนาซอฟต์แวร์ &nbsp;·&nbsp; Flutter · Firebase · FastAPI · AI',
+      'hero.summary':'สร้าง<strong>แอปมือถือและเว็บแบบ full-stack</strong> — ตั้งแต่แอปคัดกรองสุขภาพจิตด้วย Flutter ไปจนถึง<strong>ผู้ช่วย AI ด้านการเกษตร</strong> มีประสบการณ์ด้าน RAG pipeline, REST API, real-time database และ computer vision รวมถึงการฝึกงานวิจัย<strong>นานาชาติที่ญี่ปุ่น</strong> ณ Kagawa KOSEN (NITKC) และโครงการแลกเปลี่ยนออนไลน์กับอินเดีย',
+      'hero.stat1.label':'โปรเจกต์','hero.stat2.label':'โปรแกรมนานาชาติ',
+      'hero.stat3.label':'เดือน ที่ KOSEN','hero.stat4.label':'จบการศึกษา',
+      'hero.cta.contact':'ติดต่อเรา →','hero.avail':'พร้อมรับตำแหน่ง Junior Developer',
+      'about.title':'เกี่ยว<em>กับฉัน</em>',
+      'about.p1':'จบการศึกษาระดับปริญญาตรีสาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล จากมหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (มทร.ธัญบุรี) เกรดเฉลี่ย 2.90/4.00 จบการศึกษาเดือนเมษายน 2569',
+      'about.p2':'มีประสบการณ์พัฒนาแอปมือถือด้วย Flutter, frontend ด้วย Next.js/React, backend ด้วย FastAPI/Flask, ระบบ cloud ด้วย Firebase และการผสานรวม AI อาทิ RAG pipeline, TensorFlow Lite และ computer vision ด้วย PyTorch',
+      'about.p3':'มีประสบการณ์ด้าน IoT กับ NodeMCU ESP8266, ESP32 และ Arduino สำหรับระบบเซ็นเซอร์และควบคุมมอเตอร์',
+      'about.jp':'ได้รับคัดเลือกเข้าร่วม<strong>โครงการ Global Engineer Training Program</strong> ณ สถาบันเทคโนโลยีแห่งชาติ วิทยาลัยคากาวะ (NITKC) ประเทศญี่ปุ่น ตั้งแต่เดือนกันยายนถึงธันวาคม 2568 พัฒนาระบบ AI สนับสนุนการเพาะปลูกสตรอว์เบอร์รีด้วย RAG และ computer vision',
+      'contact.phone.label':'โทรศัพท์','contact.email.label':'อีเมล','contact.github.label':'GitHub',
+      'contact.linkedin.label':'LinkedIn','contact.location.label':'ที่อยู่',
+      'contact.location.val':'ปทุมธานี · รับพิจารณา กรุงเทพฯ / อยุธยา',
+      'skills.title':'ทักษะ<em>ด้านเทคนิค</em>',
+      'skill.mobile':'มือถือ','skill.frontend':'ฟรอนต์เอนด์','skill.backend':'แบ็กเอนด์',
+      'skill.ai':'AI & ข้อมูล','skill.db':'ฐานข้อมูล & Cloud','skill.iot':'IoT',
+      'skill.lang':'ภาษาโปรแกรมหลัก','skill.tools':'เครื่องมือ',
+      'proj.title':'ผลงาน<em>ที่เลือก</em>',
+      'proj.jitdee.badge':'แอปสุขภาพจิต','proj.jitdee.org':'แอปคัดกรองสุขภาพจิต Full-stack',
+      'proj.jitdee.desc':'แอปมือถือระดับ production ครอบคลุม PHQ-9, การนัดหมาย และระบบจัดการผู้ป่วยสำหรับผู้ใช้ทั้งฝั่งผู้รับบริการและนักจิตวิทยา',
+      'proj.jitdee.b1':'ระบบ role-based (ผู้ป่วย / นักจิตวิทยา) ด้วย Firebase Auth + Firestore rules',
+      'proj.jitdee.b2':'ติดตามนัดหมายแบบ real-time และ push notification ผ่าน Firebase Cloud Messaging',
+      'proj.jitdee.b3':'ตรวจจับอารมณ์บนอุปกรณ์ด้วย TFLite + ML Kit แบบ isolate thread',
+      'proj.case':'Case Study ↗','proj.cert':'ใบรับรอง ↗',
+      'proj.agri.year':'2025 · ญี่ปุ่น 🇯🇵','proj.agri.badge':'วิจัย AI',
+      'proj.agri.org':'ผู้ช่วย AI ด้านเกษตรกรรม · Kagawa KOSEN (NITKC)',
+      'proj.agri.desc':'ผู้ช่วย AI สำหรับค้นหาองค์ความรู้การเพาะปลูกสตรอว์เบอร์รี สร้างระหว่างฝึกงานวิจัย 3 เดือน ณ NITKC ญี่ปุ่น',
+      'proj.agri.b1':'RAG pipeline ด้วย FAISS, E5 embeddings และ Gemma2 ผ่าน Ollama',
+      'proj.agri.b2':'Backend API ด้วย FastAPI/Flask และ computer vision ด้วย PyTorch + BLIP-2',
+      'proj.agri.b3':'สถาปัตยกรรม multi-module: ChatBot (Next.js), LLMServer (Flask), FrameCompletion, EyeCamera, HMD',
+      'proj.agri.b4':'ทีมวิจัยนานาชาติ 5 คน นำเสนอต่อคณาจารย์ที่ NITKC',
+      'proj.social.badge':'โซเชียลมีเดีย','proj.social.org':'แอปโซเชียลมีเดียบนมือถือด้วย Flutter',
+      'proj.social.desc':'แอปโซเชียลมีเดียครบฟีเจอร์ ทั้ง auth, CRUD, แชท และมัลติมีเดีย',
+      'proj.social.b1':'สร้างระบบจัดการผู้ใช้ โพสต์ มีเดีย และแชทด้วย PHP REST API และ MySQL',
+      'proj.social.b2':'เชื่อม Flutter frontend กับ backend ผ่าน structured API layer',
+      'proj.print.badge':'เว็บแอป','proj.print.org':'เว็บ E-commerce Full-stack',
+      'proj.print.desc':'โปรเจกต์เว็บ full-stack ยุคแรก ครอบคลุม product, order และ file handling — แสดงรากฐานด้าน server-side rendering',
+      'proj.print.b1':'สร้าง views, routes, uploads และ order pages ด้วย Node.js + EJS',
+      'proj.print.b2':'ใช้ Git version control ตั้งแต่ commit แรก',
+      'proj.iot.badge':'IoT','proj.iot.org':'ระบบควบคุมอุปกรณ์ไฟฟ้าแบบ real-time',
+      'proj.iot.desc':'ระบบ IoT สำหรับควบคุมอุปกรณ์ไฟฟ้าแบบ real-time ด้วย NodeMCU ESP8266, Firebase Realtime Database และ relay modules',
+      'exp.title':'ประวัติการ<em>ทำงาน</em>',
+      'exp.dates':'11 ก.ย. – 9 ธ.ค.<br>2568',
+      'exp.role':'ผู้ช่วยวิจัย — ฝึกงานนานาชาติ',
+      'exp.org':'สถาบันเทคโนโลยีแห่งชาติ วิทยาลัยคากาวะ (NITKC) · ญี่ปุ่น',
+      'exp.b1':'ได้รับคัดเลือกเข้าร่วมโครงการ Global Engineer Training Program ที่ NITKC',
+      'exp.b2':'พัฒนาผู้ช่วย AI สำหรับการเพาะปลูกสตรอว์เบอร์รีด้วย RAG, FAISS และ Gemma2 LLM',
+      'exp.b3':'พัฒนา backend API (FastAPI/Flask) และฟีเจอร์ computer vision (PyTorch, BLIP-2)',
+      'exp.b4':'ทำงานร่วมกับทีมวิจัยนานาชาติ และนำเสนอต่อคณาจารย์',
+      'exp.b5':'ใบรับรองออกโดย Dr. Nobuo Araki ประธาน NITKC วันที่ 9 ธันวาคม 2568',
+      'cert.title':'ใบ<em>รับรอง</em>','cert.view':'ดูใบรับรอง ↗',
+      'cert.jp.pill':'โปรแกรมฝึกงาน','cert.jp.title':'Global Engineer Training Program',
+      'cert.jp.org':'สถาบันเทคโนโลยีแห่งชาติ วิทยาลัยคากาวะ (NITKC)','cert.jp.meta':'11 ก.ย. – 9 ธ.ค. 2568',
+      'cert.india.pill':'โครงการแลกเปลี่ยน','cert.india.title':'Student-Faculty Exchange Program',
+      'cert.india.org':'Patkar-Varde College (Autonomous), มุมไบ อินเดีย','cert.india.meta':'23–29 เม.ย. 2568 · คะแนน 38/50',
+      'cert.cable.pill':'ฝึกอบรมเทคนิค','cert.cable.title':'Cabling Contest Training #12',
+      'cert.cable.org':'Interlink Certify · American Standard','cert.cable.meta':'2567',
+      'cert.kmitl1.pill':'เวิร์กชอป','cert.kmitl1.title':'K-Engineering World Workshop 2021',
+      'cert.kmitl1.org':'คณะวิศวกรรมศาสตร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง (สจล.)',
+      'cert.kmitl1.meta':'IoT & วิศวกรรมระบบสารสนเทศ · 7 พ.ย. 2564',
+      'cert.kmitl2.meta':'วิศวกรรมซอฟต์แวร์ · 7 พ.ย. 2564',
+      'edu.title':'ประวัติ<em>การศึกษา</em>',
+      'edu.degree':'ปริญญาตรีสาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล',
+      'edu.school':'มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (มทร.ธัญบุรี)',
+      'edu.detail1':'เกรดเฉลี่ย: 2.90 / 4.00','edu.detail2':'คณะวิทยาศาสตร์และเทคโนโลยี · ปทุมธานี',
+      'edu.jp.top':'Global Engineer Training Program',
+      'edu.jp.sub':'สถาบันเทคโนโลยีแห่งชาติ วิทยาลัยคากาวะ (NITKC)',
+      'edu.jp.date':'3 เดือน · กันยายน – ธันวาคม 2568 · คากาวะ ญี่ปุ่น',
+      'edu.jp.link':'ดูใบรับรอง ↗',
+      'soft.1':'แก้ปัญหา','soft.2':'คิดวิเคราะห์','soft.3':'ปรับตัวได้ดี',
+      'soft.4':'ทำงานเป็นทีม','soft.5':'มีความรับผิดชอบ','soft.6':'ภาษาไทย — เจ้าของภาษา',
+      'soft.7':'ภาษาอังกฤษ — ระดับกลาง (CEFR B1 · RT-TEP 4.0)',
+      'footer.sub':'นักพัฒนาซอฟต์แวร์ · กรุงเทพฯ / อยุธยา / ปทุมธานี',
+      'footer.email':'อีเมล','footer.resume':'เรซูเม่',
+    }
+  };
+
+  let currentLang = (()=>{ try{ return localStorage.getItem('ks-lang')||'en'; }catch(e){return 'en';} })();
+
+  function applyLang(lang){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.dataset.i18n;
+      if(LANG[lang] && LANG[lang][key] !== undefined) el.innerHTML = LANG[lang][key];
+    });
+    document.documentElement.setAttribute('data-lang', lang);
+    try{ localStorage.setItem('ks-lang', lang); }catch(e){}
+    document.querySelectorAll('.lang-toggle').forEach(btn=>{
+      btn.textContent = lang === 'en' ? 'TH' : 'EN';
+    });
+    currentLang = lang;
+    // re-render modal if open
+    if(openCaseKey && overlay.classList.contains('open')) openCase(openCaseKey);
+  }
+
+  function toggleLang(){
+    applyLang(currentLang === 'en' ? 'th' : 'en');
+  }
+
+  document.getElementById('lang-btn').addEventListener('click', toggleLang);
+  document.getElementById('lang-btn-mobile').addEventListener('click', toggleLang);
+
+  /* ── CASE STUDY DATA ── */
+  const CASES = {
+    jitdee: {
+      eyebrow: "Mental Health App · 2025",
+      eyebrow_th: "แอปสุขภาพจิต · 2568",
+      title: "JitDee — Clinic Mental Health Screening",
+      title_th: "JitDee — ระบบคัดกรองสุขภาพจิตคลินิก",
+      sub: "Full-stack Flutter + Firebase app for PHQ-9 / TMHI-55 mental health screening, appointment booking, and clinic-side case management for patients and clinicians.",
+      sub_th: "แอปมือถือ Flutter + Firebase ครบวงจร สำหรับการคัดกรอง PHQ-9 / TMHI-55 การจองนัดหมาย และระบบจัดการเคสฝั่งคลินิกสำหรับผู้รับบริการและนักจิตวิทยา",
+      youtube: "TKIbILc-7jY",
+      stack: ["Flutter","Dart","Firebase Auth","Firestore","FCM","TFLite","ML Kit"],
+      gallery: [
+        {src:"certs/jitdee/jitdee_login.jpg", label:"Login"},
+        {src:"certs/jitdee/jitdee_register.jpg", label:"Register"},
+        {src:"certs/jitdee/jitdee_home.jpg", label:"Home"},
+        {src:"certs/jitdee/jitdee_news.jpg", label:"News"},
+        {src:"certs/jitdee/jitdee_phq9.jpg", label:"PHQ-9"},
+        {src:"certs/jitdee/jitdee_tmhi55.jpg", label:"TMHI-55"},
+        {src:"certs/jitdee/jitdee_deep_result.jpg", label:"Deep Result"},
+        {src:"certs/jitdee/jitdee_appointment.jpg", label:"Appointment"},
+        {src:"certs/jitdee/jitdee_admin_dashboard.jpg", label:"Admin"},
+        {src:"certs/jitdee/jitdee_patient_list.jpg", label:"Patients"},
+        {src:"certs/jitdee/jitdee_appointment_queue.jpg", label:"Queue"},
+        {src:"certs/jitdee/jitdee_news_manage.jpg", label:"News Admin"},
+      ],
+      blocks: [
+        {label:"Problem", type:"p", content:"Clinics need a fast way to screen patients for depression risk (PHQ-9) and deeper mental health indicators (TMHI-55), then route high-risk cases to a clinician without manual paperwork."},
+        {label:"Outcome", type:"p", content:"A role-based mobile app where patients self-screen, see a risk score in real time, and request appointments — while clinicians get a live dashboard, patient queue, and case notes."},
+        {label:"Key Features", type:"ul", content:[
+          "Role-based access (patient / clinician / admin) via Firebase Auth + Firestore security rules",
+          "PHQ-9 and TMHI-55 assessments with auto-scored risk levels and color-coded results",
+          "Real-time appointment request + queue management with push notifications via FCM",
+          "On-device emotion detection using TensorFlow Lite + ML Kit, processed in an isolate thread to keep the UI smooth",
+          "Admin news management system for publishing mental health content to patients"
+        ], full:true},
+      ],
+      blocks_th: [
+        {label:"ปัญหา", type:"p", content:"คลินิกต้องการวิธีที่รวดเร็วในการคัดกรองผู้ป่วยด้านความเสี่ยงซึมเศร้า (PHQ-9) และตัวชี้วัดสุขภาพจิตเชิงลึก (TMHI-55) แล้วส่งต่อเคสความเสี่ยงสูงไปยังนักจิตวิทยา โดยไม่ต้องทำเอกสารด้วยมือ"},
+        {label:"ผลลัพธ์", type:"p", content:"แอปมือถือแบบ role-based ที่ผู้ป่วยสามารถคัดกรองตัวเองได้ เห็นคะแนนความเสี่ยงแบบ real-time และขอนัดหมาย ขณะที่นักจิตวิทยาได้รับ dashboard สด คิวผู้ป่วย และบันทึกเคส"},
+        {label:"ฟีเจอร์หลัก", type:"ul", content:[
+          "ระบบ role-based (ผู้ป่วย / นักจิตวิทยา / แอดมิน) ผ่าน Firebase Auth + Firestore security rules",
+          "แบบประเมิน PHQ-9 และ TMHI-55 พร้อมคะแนนความเสี่ยงอัตโนมัติและผลลัพธ์แบบ color-coded",
+          "ระบบขอนัดหมายแบบ real-time + จัดการคิว พร้อม push notification ผ่าน FCM",
+          "ตรวจจับอารมณ์บนอุปกรณ์ด้วย TensorFlow Lite + ML Kit ประมวลผลใน isolate thread เพื่อให้ UI ลื่นไหล",
+          "ระบบจัดการข่าวสารสำหรับแอดมิน สำหรับเผยแพร่เนื้อหาสุขภาพจิตให้ผู้ป่วย"
+        ], full:true},
+      ],
+      links: [{label:"GitHub ↗", href:"https://github.com/Kanokchat01/Jit_App"}]
+    },
+    agrihacks: {
+      eyebrow: "AI Research · Japan 🇯🇵 · 2025",
+      eyebrow_th: "วิจัย AI · ญี่ปุ่น 🇯🇵 · 2568",
+      title: "Agri-Hacks — AI Agricultural Knowledge Assistant",
+      title_th: "Agri-Hacks — ผู้ช่วย AI ด้านความรู้การเกษตร",
+      sub: "Built during a 3-month research internship at Kagawa KOSEN (NITKC), Japan. Screenshots are not shown as this was confidential lab research — summary below describes the work and outcome.",
+      sub_th: "สร้างระหว่างฝึกงานวิจัย 3 เดือน ณ Kagawa KOSEN (NITKC) ประเทศญี่ปุ่น ไม่สามารถแสดงภาพหน้าจอได้เนื่องจากเป็นงานวิจัยลับของห้องปฏิบัติการ — ดูรายละเอียดงานและผลลัพธ์ด้านล่าง",
+      stack: ["Next.js","FastAPI","Flask","PyTorch","FAISS","Ollama (Gemma2)","BLIP-2"],
+      gallery: [
+        {src:"certs/agri-hacks/teamlab.jpg", label:"Team & Lab"},
+        {src:"certs/agri-hacks/20250916_092149.jpg", label:"Sep 2025"},
+        {src:"certs/agri-hacks/20251003_140134.jpg", label:"Oct 2025"},
+        {src:"certs/agri-hacks/20251003_140444.jpg", label:"Oct 2025"},
+        {src:"certs/agri-hacks/20251003_140842.jpg", label:"Oct 2025"},
+        {src:"certs/agri-hacks/IMG_0138.JPG", label:"Research Lab"},
+      ],
+      landscape: true,
+      blocks: [
+        {label:"Problem", type:"p", content:"Experienced strawberry farmers hold valuable tacit knowledge that is hard to pass on. The lab wanted an AI assistant that could capture and surface this knowledge through natural conversation and image-based plant diagnosis."},
+        {label:"My Role", type:"p", content:"Worked as part of a cross-national 5-person research team, focused on the RAG retrieval pipeline and backend API integration, with contributions to computer vision tooling."},
+        {label:"What I Built", type:"ul", content:[
+          "RAG pipeline using FAISS vector search, E5 embeddings, and Gemma2 (via Ollama) for domain-specific Q&A retrieval",
+          "Backend APIs with FastAPI and Flask connecting the chatbot frontend to the LLM server",
+          "Computer vision integration using PyTorch and BLIP-2 for image-based plant condition description",
+          "Contributed to a multi-module system: ChatBot (Next.js), LLMServer (Flask), FrameCompletion, EyeCamera, HMD"
+        ], full:true},
+        {label:"Outcome", type:"p", content:"Proposed and developed a strawberry cultivation AI support system as the team's final research deliverable, presented to NITKC faculty. Due to lab confidentiality, source code and screenshots are not publicly shareable — see certificate for verification.", full:true},
+      ],
+      blocks_th: [
+        {label:"ปัญหา", type:"p", content:"เกษตรกรผู้เพาะปลูกสตรอว์เบอร์รีที่มีประสบการณ์ถือครองความรู้โดยนัยที่ยากต่อการถ่ายทอด ห้องปฏิบัติการต้องการผู้ช่วย AI ที่สามารถรวบรวมและนำเสนอความรู้นั้นผ่านการสนทนาและการวินิจฉัยพืชด้วยภาพ"},
+        {label:"บทบาทของฉัน", type:"p", content:"ทำงานเป็นส่วนหนึ่งของทีมวิจัยนานาชาติ 5 คน รับผิดชอบ RAG retrieval pipeline และการเชื่อมต่อ backend API พร้อมมีส่วนร่วมในด้าน computer vision"},
+        {label:"สิ่งที่สร้าง", type:"ul", content:[
+          "RAG pipeline ด้วย FAISS vector search, E5 embeddings และ Gemma2 (ผ่าน Ollama) สำหรับ Q&A เฉพาะโดเมน",
+          "Backend API ด้วย FastAPI และ Flask เชื่อมต่อ chatbot frontend กับ LLM server",
+          "ผสาน computer vision ด้วย PyTorch และ BLIP-2 สำหรับอธิบายสภาพพืชจากภาพ",
+          "มีส่วนร่วมในระบบ multi-module: ChatBot (Next.js), LLMServer (Flask), FrameCompletion, EyeCamera, HMD"
+        ], full:true},
+        {label:"ผลลัพธ์", type:"p", content:"เสนอและพัฒนาระบบ AI สนับสนุนการเพาะปลูกสตรอว์เบอร์รีเป็นผลงานวิจัยสุดท้ายของทีม นำเสนอต่อคณาจารย์ NITKC เนื่องจากข้อกำหนดความลับของห้องปฏิบัติการ ซอร์สโค้ดและภาพหน้าจอจึงไม่สามารถเผยแพร่ต่อสาธารณะ — ดูใบรับรองเพื่อยืนยัน", full:true},
+      ],
+      links: [{label:"View Certificate ↗", href:"CERTIFICATE_OF_COMPLETION.pdf"}]
+    },
+    social: {
+      eyebrow: "Social Media · 2024",
+      eyebrow_th: "โซเชียลมีเดีย · 2567",
+      title: "Social Network App",
+      title_th: "Social Network App",
+      sub: "A Flutter-based mobile social media application with authentication, post feeds, real-time chat, and multimedia sharing — backed by a custom PHP REST API.",
+      sub_th: "แอปโซเชียลมีเดียบนมือถือด้วย Flutter มีระบบ auth, ฟีดโพสต์, แชทแบบ real-time และการแชร์มัลติมีเดีย รองรับด้วย PHP REST API ที่สร้างเอง",
+      stack: ["Flutter","Dart","PHP REST API","MySQL"],
+      gallery: [],
+      blocks: [
+        {label:"Problem", type:"p", content:"Wanted to learn how a full social platform is built end-to-end — from mobile UI to a custom backend — rather than relying on a backend-as-a-service."},
+        {label:"What I Built", type:"ul", content:[
+          "Flutter mobile app with authentication, CRUD post creation, and multimedia (image) uploads",
+          "Real-time chat between users",
+          "PHP REST API layer handling users, posts, comments, and media, backed by MySQL"
+        ], full:true},
+        {label:"Outcome", type:"p", content:"Solidified understanding of REST API design, relational data modeling, and connecting a mobile frontend to a self-hosted backend rather than a managed service like Firebase.", full:true},
+      ],
+      blocks_th: [
+        {label:"ปัญหา", type:"p", content:"ต้องการเรียนรู้วิธีสร้างแพลตฟอร์มโซเชียลมีเดียแบบครบวงจร ตั้งแต่ UI มือถือไปจนถึง backend ที่สร้างเอง แทนที่จะพึ่งพา backend-as-a-service"},
+        {label:"สิ่งที่สร้าง", type:"ul", content:[
+          "แอป Flutter มือถือ มีระบบ auth, สร้างโพสต์ CRUD และอัปโหลดมัลติมีเดีย (รูปภาพ)",
+          "แชทแบบ real-time ระหว่างผู้ใช้",
+          "PHP REST API จัดการผู้ใช้ โพสต์ คอมเมนต์ และมีเดีย รองรับด้วย MySQL"
+        ], full:true},
+        {label:"ผลลัพธ์", type:"p", content:"ทำให้เข้าใจการออกแบบ REST API, relational data modeling และการเชื่อมต่อ mobile frontend กับ backend ที่ host เองแทนการใช้ managed service อย่าง Firebase", full:true},
+      ],
+      links: [{label:"GitHub ↗", href:"https://github.com/Kanokchat01/Project"}]
+    },
+    printstore: {
+      eyebrow: "Web App · 2023",
+      eyebrow_th: "เว็บแอป · 2566",
+      title: "Web Print Store",
+      title_th: "Web Print Store",
+      sub: "An early full-stack e-commerce web project for a print shop — product browsing, ordering, and file upload handling using server-side rendering.",
+      sub_th: "เว็บ e-commerce full-stack ยุคแรกสำหรับร้านพิมพ์ — มีระบบ product, order และจัดการไฟล์ ใช้ server-side rendering",
+      stack: ["Node.js","JavaScript","EJS","CSS"],
+      gallery: [],
+      blocks: [
+        {label:"Problem", type:"p", content:"Wanted hands-on practice with classic server-side web architecture before moving to component-based frameworks — building views, routes, and file handling from scratch."},
+        {label:"What I Built", type:"ul", content:[
+          "Server-rendered views using Node.js and the EJS templating engine",
+          "Product, order, and image upload pages with file handling",
+          "Git version control from the project's first commit"
+        ], full:true},
+        {label:"Outcome", type:"p", content:"This project is one of my earliest full-stack builds — it laid the foundation for the API design and routing patterns I now use in FastAPI and Flask projects.", full:true},
+      ],
+      blocks_th: [
+        {label:"ปัญหา", type:"p", content:"ต้องการฝึกฝนสถาปัตยกรรมเว็บแบบ server-side แบบดั้งเดิมก่อนจะเปลี่ยนไปใช้ component-based framework โดยสร้าง views, routes และ file handling ตั้งแต่ต้น"},
+        {label:"สิ่งที่สร้าง", type:"ul", content:[
+          "Server-rendered views ด้วย Node.js และ EJS templating engine",
+          "หน้า product, order และอัปโหลดรูปภาพ พร้อม file handling",
+          "Git version control ตั้งแต่ commit แรกของโปรเจกต์"
+        ], full:true},
+        {label:"ผลลัพธ์", type:"p", content:"โปรเจกต์นี้เป็นหนึ่งใน full-stack build ยุคแรกของฉัน — วางรากฐานของการออกแบบ API และ routing patterns ที่ฉันใช้ใน FastAPI และ Flask ในปัจจุบัน", full:true},
+      ],
+      links: [{label:"GitHub ↗", href:"https://github.com/Kanokchat01/web_printstore"}]
+    },
+    iot: {
+      eyebrow: "IoT · 2021",
+      eyebrow_th: "IoT · 2564",
+      title: "Electrical Control System",
+      title_th: "ระบบควบคุมอุปกรณ์ไฟฟ้า",
+      sub: "A real-time IoT system to control household electrical devices remotely using a microcontroller, relay modules, and a cloud realtime database.",
+      sub_th: "ระบบ IoT สำหรับควบคุมอุปกรณ์ไฟฟ้าภายในบ้านจากระยะไกลแบบ real-time ด้วย microcontroller, relay modules และ cloud realtime database",
+      stack: ["NodeMCU ESP8266","Firebase Realtime DB","Relay Modules"],
+      gallery: [],
+      blocks: [
+        {label:"Problem", type:"p", content:"Wanted to control physical electrical devices (lights, fans, appliances) remotely and in real time, as an early hands-on introduction to IoT and embedded programming."},
+        {label:"What I Built", type:"ul", content:[
+          "NodeMCU ESP8266 firmware to read commands and switch relay modules controlling real electrical devices",
+          "Firebase Realtime Database as the sync layer between a control interface and the physical device",
+          "Real-time state sync so device status reflects instantly across whatever is controlling it"
+        ], full:true},
+        {label:"Outcome", type:"p", content:"My first project bridging software and hardware — gave me the embedded systems foundation I later built on with ESP32 and Arduino sensor/motor projects.", full:true},
+      ],
+      blocks_th: [
+        {label:"ปัญหา", type:"p", content:"ต้องการควบคุมอุปกรณ์ไฟฟ้าจริง (ไฟ, พัดลม, เครื่องใช้ไฟฟ้า) จากระยะไกลแบบ real-time เป็นการเริ่มต้นเรียนรู้ IoT และการเขียนโปรแกรม embedded"},
+        {label:"สิ่งที่สร้าง", type:"ul", content:[
+          "Firmware บน NodeMCU ESP8266 สำหรับอ่านคำสั่งและสั่งงาน relay modules ที่ควบคุมอุปกรณ์ไฟฟ้าจริง",
+          "Firebase Realtime Database เป็น sync layer ระหว่าง interface ควบคุมกับอุปกรณ์จริง",
+          "การซิงค์สถานะแบบ real-time ให้สถานะอุปกรณ์แสดงผลทันทีทุกที่ที่ควบคุม"
+        ], full:true},
+        {label:"ผลลัพธ์", type:"p", content:"โปรเจกต์แรกที่เชื่อมโยงซอฟต์แวร์กับฮาร์ดแวร์ — วางรากฐาน embedded systems ที่ฉันต่อยอดด้วย ESP32 และ Arduino ในโปรเจกต์ sensor/motor ต่อมา", full:true},
+      ],
+      links: []
+    }
+  };
+
+  /* ── MODAL LOGIC ── */
+  const overlay = document.getElementById('case-overlay');
+  const modal = document.getElementById('case-modal');
+  let curGallery = [];
+  let curIndex = 0;
+  let openCaseKey = null;
+
+  function renderBlock(b){
+    if(b.type === 'p'){
+      return `<div class="case-block${b.full?' full':''}"><div class="case-block-label">${b.label}</div><p>${b.content}</p></div>`;
+    }
+    const items = b.content.map(li=>`<li>${li}</li>`).join('');
+    return `<div class="case-block${b.full?' full':''}"><div class="case-block-label">${b.label}</div><ul>${items}</ul></div>`;
+  }
+
+  function showSlide(i){
+    if(!curGallery.length) return;
+    curIndex = (i + curGallery.length) % curGallery.length;
+    document.getElementById('gal-main-img').src = curGallery[curIndex].src;
+    document.getElementById('gal-main-img').alt = curGallery[curIndex].label;
+    document.getElementById('gal-counter').textContent = `${curIndex+1} / ${curGallery.length}`;
+    document.querySelectorAll('.case-thumb').forEach((t,idx)=>t.classList.toggle('active', idx===curIndex));
+    const activeThumb = document.querySelectorAll('.case-thumb')[curIndex];
+    if(activeThumb) activeThumb.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+  }
+
+  function openCase(key){
+    const c = CASES[key];
+    if(!c) return;
+    openCaseKey = key;
+    const isTH = currentLang === 'th';
+    document.getElementById('case-eyebrow').textContent = (isTH && c.eyebrow_th) ? c.eyebrow_th : c.eyebrow;
+    document.getElementById('case-title').textContent = (isTH && c.title_th) ? c.title_th : c.title;
+    document.getElementById('case-sub').textContent = (isTH && c.sub_th) ? c.sub_th : c.sub;
+    document.getElementById('case-stack').innerHTML = c.stack.map(s=>`<span class="tag accent">${s}</span>`).join('');
+    const blocks = (isTH && c.blocks_th) ? c.blocks_th : c.blocks;
+    document.getElementById('case-body').innerHTML = blocks.map(renderBlock).join('') +
+      (c.links && c.links.length ? `<div class="case-links-row">${c.links.map(l=>`<a href="${l.href}" target="_blank" rel="noopener" class="link-btn">${l.label}</a>`).join('')}</div>` : '');
+
+    const videoWrap = document.getElementById('case-video-wrap');
+    const videoEl = document.getElementById('case-video');
+    if(c.youtube){
+      videoEl.src = `https://www.youtube.com/embed/${c.youtube}?rel=0`;
+      videoWrap.style.display = '';
+    } else {
+      videoEl.src = '';
+      videoWrap.style.display = 'none';
+    }
+
+    const galWrap = document.getElementById('case-gallery-wrap');
+    const galMain = document.querySelector('.case-gallery-main');
+    galMain.classList.toggle('landscape', !!c.landscape);
+    curGallery = c.gallery || [];
+    if(curGallery.length){
+      galWrap.style.display = '';
+      document.getElementById('case-thumbs').innerHTML = curGallery.map((g,idx)=>
+        `<div><button class="case-thumb" data-idx="${idx}" aria-label="${g.label}"><img src="${g.src}" alt="${g.label}"/></button><div class="case-thumb-label">${g.label}</div></div>`
+      ).join('');
+      document.querySelectorAll('.case-thumb').forEach(t=>{
+        t.addEventListener('click', ()=>showSlide(parseInt(t.dataset.idx)));
+      });
+      showSlide(0);
+    } else {
+      galWrap.style.display = 'none';
+    }
+
+    overlay.classList.add('open');
+    document.body.classList.add('modal-locked');
+  }
+
+  function closeCase(){
+    overlay.classList.remove('open');
+    document.body.classList.remove('modal-locked');
+    document.getElementById('case-video').src = '';
+    openCaseKey = null;
+  }
+
+  document.querySelectorAll('.case-trigger').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      openCase(btn.dataset.case);
+    });
+  });
+  document.getElementById('case-close').addEventListener('click', closeCase);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCase(); });
+  document.getElementById('gal-prev').addEventListener('click', ()=>showSlide(curIndex-1));
+  document.getElementById('gal-next').addEventListener('click', ()=>showSlide(curIndex+1));
+  document.addEventListener('keydown', (e)=>{
+    if(!overlay.classList.contains('open')) return;
+    if(e.key === 'Escape') closeCase();
+    if(e.key === 'ArrowLeft') showSlide(curIndex-1);
+    if(e.key === 'ArrowRight') showSlide(curIndex+1);
+  });
+
+  // apply saved language on load (must be last — after all declarations)
+  if(currentLang === 'th') applyLang('th');
 </script>
 </body>
 </html>
