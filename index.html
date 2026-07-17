@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-size:18px;}
 
 :root{
   --cream:#f6fbf6;
@@ -358,7 +358,7 @@ a{text-decoration:none;color:inherit}
 .proj-card{
   padding:26px 28px;border-bottom:1px solid var(--border);
   display:grid;grid-template-columns:1fr auto;gap:20px;
-  transition:background 0.25s;position:relative;
+  transition:background 0.25s;position:relative;cursor:pointer;
 }
 .proj-card::before{
   content:"";position:absolute;left:0;top:0;bottom:0;width:0;
@@ -370,9 +370,9 @@ a{text-decoration:none;color:inherit}
 .proj-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
 .proj-year-tag{font-size:0.63rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink4);}
 .proj-badge{
-  font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;
-  padding:2px 7px;border-radius:2px;
-  background:rgba(127,170,131,0.14);color:var(--rust);border:1px solid rgba(127,170,131,0.24);
+  font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;
+  padding:3px 9px;border-radius:3px;
+  background:var(--rust);color:var(--cream);border:none;
 }
 .proj-name{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--ink);margin-bottom:3px;letter-spacing:-0.01em;}
 .proj-org{font-size:0.77rem;color:var(--ink3);margin-bottom:11px;font-style:italic;}
@@ -890,9 +890,11 @@ body.modal-locked{overflow:hidden;}
           <li data-i18n="proj.caption.b3">Bulletproof reliability: paced retry system + hard 10-min wall-clock budget ensures valid output always delivered</li>
         </ul>
         <div class="proj-links">
-          <button class="link-btn case-trigger" data-case="captionforge" data-i18n="proj.case">Case Study ↗</button>
+          <button class="link-btn case-trigger" data-case="captionforge" data-i18n="proj.case">Details ↗</button>
           <a href="https://github.com/Kanokchat01/captionforge" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
           <a href="https://captionforge.onrender.com" target="_blank" rel="noopener" class="link-btn">Demo ↗</a>
+          <a href="https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-ii/m3owai/captionforge-thai" target="_blank" rel="noopener" class="link-btn">lablab.ai ↗</a>
+          <a href="certs/CaptionForge/CaptionForge_Presentation.pdf" target="_blank" rel="noopener" class="link-btn">Slides ↗</a>
         </div>
       </div>
       <div class="proj-num-big">01</div>
@@ -910,13 +912,13 @@ body.modal-locked{overflow:hidden;}
           <li data-i18n="proj.jitdee.b3">On-device emotion detection using TFLite + ML Kit with isolate-based threading</li>
         </ul>
         <div class="proj-links">
-          <button class="link-btn case-trigger" data-case="jitdee" data-i18n="proj.case">Case Study ↗</button>
+          <button class="link-btn case-trigger" data-case="jitdee" data-i18n="proj.case">Details ↗</button>
           <a href="https://github.com/Kanokchat01/Jit_App" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
         </div>
       </div>
       <div class="proj-num-big">02</div>
     </article>
-    <article class="proj-card">
+    <article class="proj-card" data-case="agrihacks">
       <div>
         <div class="proj-meta"><span class="proj-year-tag" data-i18n="proj.agri.year">2025 · Japan 🇯🇵</span><span class="proj-badge" data-i18n="proj.agri.badge">AI Research</span></div>
         <div class="proj-name">Agri-Hacks</div>
@@ -930,13 +932,13 @@ body.modal-locked{overflow:hidden;}
           <li data-i18n="proj.agri.b4">Cross-national 5-person research team; presented to faculty at NITKC</li>
         </ul>
         <div class="proj-links">
-          <button class="link-btn case-trigger" data-case="agrihacks" data-i18n="proj.case">Case Study ↗</button>
+          <button class="link-btn case-trigger" data-case="agrihacks" data-i18n="proj.case">Details ↗</button>
           <a href="CERTIFICATE_OF_COMPLETION.pdf" target="_blank" rel="noopener" class="link-btn" data-i18n="proj.cert">Certificate ↗</a>
         </div>
       </div>
       <div class="proj-num-big">03</div>
     </article>
-    <article class="proj-card">
+    <article class="proj-card" data-case="social">
       <div>
         <div class="proj-meta"><span class="proj-year-tag">2024</span><span class="proj-badge" data-i18n="proj.social.badge">Social Media</span></div>
         <div class="proj-name">Social Network App</div>
@@ -948,13 +950,13 @@ body.modal-locked{overflow:hidden;}
           <li data-i18n="proj.social.b2">Connected Flutter frontend to backend with structured API layer</li>
         </ul>
         <div class="proj-links">
-          <button class="link-btn case-trigger" data-case="social" data-i18n="proj.case">Case Study ↗</button>
+          <button class="link-btn case-trigger" data-case="social" data-i18n="proj.case">Details ↗</button>
           <a href="https://github.com/Kanokchat01/Project" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
         </div>
       </div>
       <div class="proj-num-big">04</div>
     </article>
-    <article class="proj-card">
+    <article class="proj-card" data-case="printstore">
       <div>
         <div class="proj-meta"><span class="proj-year-tag">2023</span><span class="proj-badge" data-i18n="proj.print.badge">Web App</span></div>
         <div class="proj-name">Web Print Store</div>
@@ -966,13 +968,13 @@ body.modal-locked{overflow:hidden;}
           <li data-i18n="proj.print.b2">GitHub version-controlled from the start</li>
         </ul>
         <div class="proj-links">
-          <button class="link-btn case-trigger" data-case="printstore" data-i18n="proj.case">Case Study ↗</button>
+          <button class="link-btn case-trigger" data-case="printstore" data-i18n="proj.case">Details ↗</button>
           <a href="https://github.com/Kanokchat01/web_printstore" target="_blank" rel="noopener" class="link-btn">GitHub ↗</a>
         </div>
       </div>
       <div class="proj-num-big">05</div>
     </article>
-    <article class="proj-card">
+    <article class="proj-card" data-case="iot">
       <div>
         <div class="proj-meta"><span class="proj-year-tag">2021</span><span class="proj-badge" data-i18n="proj.iot.badge">IoT</span></div>
         <div class="proj-name">Electrical Control System</div>
@@ -980,7 +982,7 @@ body.modal-locked{overflow:hidden;}
         <div class="proj-stack"><span class="tag muted">NodeMCU ESP8266</span><span class="tag muted">Firebase</span><span class="tag muted">Relay Modules</span><span class="tag muted">IoT</span></div>
         <p class="proj-desc" data-i18n="proj.iot.desc">IoT system for real-time electrical device control using NodeMCU ESP8266, Firebase Realtime Database, and relay modules.</p>
         <div class="proj-links">
-          <button class="link-btn case-trigger" data-case="iot" data-i18n="proj.case">Case Study ↗</button>
+          <button class="link-btn case-trigger" data-case="iot" data-i18n="proj.case">Details ↗</button>
         </div>
       </div>
       <div class="proj-num-big">06</div>
@@ -1283,7 +1285,7 @@ body.modal-locked{overflow:hidden;}
       'proj.jitdee.b1':'Role-based flow (patient / clinician) using Firebase Auth + Firestore rules',
       'proj.jitdee.b2':'Real-time appointment tracking and push notifications via Firebase Cloud Messaging',
       'proj.jitdee.b3':'On-device emotion detection using TFLite + ML Kit with isolate-based threading',
-      'proj.case':'Case Study ↗','proj.cert':'Certificate ↗',
+      'proj.case':'Details ↗','proj.cert':'Certificate ↗',
       'proj.agri.year':'2025 · Japan 🇯🇵','proj.agri.badge':'AI Research',
       'proj.agri.org':'AI Agricultural Knowledge Assistant · Kagawa KOSEN (NITKC)',
       'proj.agri.desc':'AI-powered assistant for strawberry cultivation knowledge retrieval, built during a 3-month research internship at NITKC, Japan.',
@@ -1370,7 +1372,7 @@ body.modal-locked{overflow:hidden;}
       'proj.jitdee.b1':'ระบบ role-based (ผู้ป่วย / นักจิตวิทยา) ด้วย Firebase Auth + Firestore rules',
       'proj.jitdee.b2':'ติดตามนัดหมายแบบ real-time และ push notification ผ่าน Firebase Cloud Messaging',
       'proj.jitdee.b3':'ตรวจจับอารมณ์บนอุปกรณ์ด้วย TFLite + ML Kit แบบ isolate thread',
-      'proj.case':'Case Study ↗','proj.cert':'ใบรับรอง ↗',
+      'proj.case':'Details ↗','proj.cert':'ใบรับรอง ↗',
       'proj.agri.year':'2025 · ญี่ปุ่น 🇯🇵','proj.agri.badge':'วิจัย AI',
       'proj.agri.org':'ผู้ช่วย AI ด้านเกษตรกรรม · Kagawa KOSEN (NITKC)',
       'proj.agri.desc':'ผู้ช่วย AI สำหรับค้นหาองค์ความรู้การเพาะปลูกสตรอว์เบอร์รี สร้างระหว่างฝึกงานวิจัย 3 เดือน ณ NITKC ญี่ปุ่น',
@@ -1453,16 +1455,23 @@ body.modal-locked{overflow:hidden;}
   /* ── CASE STUDY DATA ── */
   const CASES = {
     captionforge: {
-      eyebrow: "AI Hackathon · 2026",
-      eyebrow_th: "AI Hackathon · 2569",
+      eyebrow: "AI Hackathon · Team M3OWAI · 2026",
+      eyebrow_th: "AI Hackathon · Team M3OWAI · 2569",
       title: "CaptionForge-THAI — AI Video Captioning Agent",
       title_th: "CaptionForge-THAI — AI สร้าง Caption วิดีโออัตโนมัติ",
       sub: "One clip in. Four captions out — each written in its own voice. Built for AMD Developer Hackathon: ACT II · Track 2.",
       sub_th: "วิดีโอเข้า 1 ตัด ออก 4 caption แต่ละสไตล์มีบุคลิกเป็นของตัวเอง สร้างสำหรับ AMD Developer Hackathon: ACT II · Track 2",
+      youtube: "K0eHJMKByjQ",
       stack: ["Python","Docker","Fireworks AI","AI/ML API","Claude Code"],
       blocks: [
-        {label:"Result", type:"p", content:"Ranked #4 out of 117 teams on the Automated Scoring Leaderboard (score 0.91) in Track 2: Video Captioning — AMD Developer Hackathon: ACT II, from 20,727 participants across 4,893 teams worldwide."},
-        {label:"The Challenge", type:"p", content:"Watch a short video clip and generate one caption per requested style — formal, sarcastic, humorous_tech, humorous_non_tech — within a hard 10-minute container runtime for ~12 hidden clips. A missing style scores zero for the entire clip."},
+        {label:"Result", type:"p", content:"Ranked #4 out of 117 teams on the Automated Scoring Leaderboard (score 0.91) in Track 2: Video Captioning — AMD Developer Hackathon: ACT II, from 20,727 participants across 4,893 teams worldwide. Scored on two dimensions: Accuracy (0–1) and Style match (0–1)."},
+        {label:"The Challenge", type:"p", content:"Watch a short video clip and generate one caption per requested style — formal, sarcastic, humorous_tech, humorous_non_tech — within a hard 10-minute container runtime for ~12 hidden clips (30s–2min each). A missing style scores zero for the entire clip."},
+        {label:"The Four Voices", type:"ul", content:[
+          "formal (30–50 words) — neutral, precise, wire-service style; no opinion or flourish",
+          "sarcastic (15–32 words) — dry deadpan irony that mocks something specific in the clip",
+          "humorous_tech (18–35 words) — maps the scene onto software life; one real tech term required",
+          "humorous_non_tech (18–35 words) — warm everyday comparison; zero technology words allowed"
+        ]},
         {label:"Design: Direct & Guarded", type:"ul", content:[
           "One vision model (qwen3p7-plus) sees 4 sampled frames + style brief and writes the caption in a single call — no multi-stage relay, no LLM judge",
           "A backup model (kimi-k2p7-code) stands by only if the primary is unreachable after retries",
@@ -1480,8 +1489,14 @@ body.modal-locked{overflow:hidden;}
         ]}
       ],
       blocks_th: [
-        {label:"ผลลัพธ์", type:"p", content:"ติดอันดับที่ 4 จาก 117 ทีม บน Automated Scoring Leaderboard (คะแนน 0.91) ใน Track 2: Video Captioning — AMD Developer Hackathon: ACT II จากผู้เข้าร่วมกว่า 20,727 คน ใน 4,893 ทีมทั่วโลก"},
-        {label:"โจทย์", type:"p", content:"ดูวิดีโอสั้นแล้วสร้าง caption ในแต่ละสไตล์ที่กำหนด ได้แก่ formal, sarcastic, humorous_tech, humorous_non_tech ภายใน 10 นาที สำหรับวิดีโอประมาณ 12 ตัว โดยถ้าขาด caption สักสไตล์เดียวจะได้ศูนย์คะแนนทั้ง clip"},
+        {label:"ผลลัพธ์", type:"p", content:"ติดอันดับที่ 4 จาก 117 ทีม บน Automated Scoring Leaderboard (คะแนน 0.91) ใน Track 2: Video Captioning — AMD Developer Hackathon: ACT II จากผู้เข้าร่วมกว่า 20,727 คน ใน 4,893 ทีมทั่วโลก โดยวัดผลใน 2 มิติ: Accuracy (0–1) และ Style match (0–1)"},
+        {label:"โจทย์", type:"p", content:"ดูวิดีโอสั้น (30วิ–2นาที) แล้วสร้าง caption ในแต่ละสไตล์ที่กำหนด ได้แก่ formal, sarcastic, humorous_tech, humorous_non_tech ภายใน 10 นาที สำหรับวิดีโอประมาณ 12 ตัว โดยถ้าขาด caption สักสไตล์เดียวจะได้ศูนย์คะแนนทั้ง clip"},
+        {label:"4 สไตล์, 4 บุคลิก", type:"ul", content:[
+          "formal (30–50 คำ) — เป็นกลาง แม่นยำ สไตล์สำนักข่าว ไม่มีความเห็น",
+          "sarcastic (15–32 คำ) — ประชดแบบ deadpan เน้นล้อเลียนสิ่งที่เห็นในคลิป",
+          "humorous_tech (18–35 คำ) — เปรียบฉากกับชีวิตโปรแกรมเมอร์ ต้องมี tech term จริงอย่างน้อยหนึ่งคำ",
+          "humorous_non_tech (18–35 คำ) — ขำแบบชาวบ้าน เปรียบง่ายๆ ไม่มีคำศัพท์เทคนิคเลย"
+        ]},
         {label:"ออกแบบแบบ Direct & Guarded", type:"ul", content:[
           "ใช้ vision model ตัวเดียว (qwen3p7-plus) ดู 4 frame + style brief แล้วเขียน caption โดยตรง — ไม่มี pipeline หลายขั้น ไม่มี LLM judge",
           "มี backup model (kimi-k2p7-code) สำรองไว้เรียกเฉพาะเมื่อ primary ล่มหลัง retry แล้ว",
@@ -1501,7 +1516,8 @@ body.modal-locked{overflow:hidden;}
       links: [
         {href:"https://github.com/Kanokchat01/captionforge", label:"GitHub ↗"},
         {href:"https://captionforge.onrender.com", label:"Demo ↗"},
-        {href:"https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-ii/m3owai/captionforge-thai", label:"lablab.ai ↗"}
+        {href:"https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-ii/m3owai/captionforge-thai", label:"lablab.ai ↗"},
+        {href:"certs/CaptionForge/CaptionForge_Presentation.pdf", label:"Slides ↗"}
       ]
     },
     jitdee: {
@@ -1762,6 +1778,14 @@ body.modal-locked{overflow:hidden;}
     btn.addEventListener('click', (e)=>{
       e.preventDefault();
       openCase(btn.dataset.case);
+    });
+  });
+
+  document.querySelectorAll('.proj-card').forEach(card=>{
+    card.addEventListener('click', (e)=>{
+      if(e.target.closest('a') || e.target.closest('.case-trigger')) return;
+      const key = card.dataset.case;
+      if(key) openCase(key);
     });
   });
   document.getElementById('case-close').addEventListener('click', closeCase);
